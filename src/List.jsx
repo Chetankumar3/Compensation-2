@@ -20,37 +20,47 @@ const FormDetails = () => {
   };
 
   return (
-    <div className="form-container">
-      {forms.map((form) => (
-        <div key={form.formID} className="form-card">
-          <h2 className="form-title">Form Details</h2>
-          <p>
-            <strong>Form ID:</strong> {form.formID}
-          </p>
-          <p>
-            <strong>Submission Date:</strong>{" "}
-            {new Date(form.submissionDateTime).toISOString().split("T")[0]}
-          </p>
-          <p>
-            <strong>Applicant Name:</strong> {form.applicantName}
-          </p>
-          <p>
-            <strong>Age:</strong> {form.age}
-          </p>
-          <p>
-            <strong>Animal:</strong> {form.animalName}
-          </p>
-          <p>
-            <strong>Incident Date:</strong> {form.incidentDate}
-          </p>
-          <button
-            className="view-button"
-            onClick={() => handleViewFullApplication(form.formID)}
-          >
-            View Full Application
-          </button>
-        </div>
-      ))}
+    <div className="container3">
+      <div className="sidebar">
+        <ul>
+          <li>Pending</li>
+          <li>Accepted</li>
+          <li>Rejected</li>
+        </ul>
+      </div>
+
+      <div className="form-container">
+        {forms.map((form) => (
+          <div key={form.formID} className="form-card">
+            <h2 className="form-title">Form Details</h2>
+            <p>
+              <strong>Form ID:</strong> {form.formID}
+            </p>
+            <p>
+              <strong>Submission Date:</strong>{" "}
+              {new Date(form.submissionDateTime).toISOString().split("T")[0]}
+            </p>
+            <p>
+              <strong>Applicant Name:</strong> {form.applicantName}
+            </p>
+            <p>
+              <strong>Age:</strong> {form.age}
+            </p>
+            <p>
+              <strong>Animal:</strong> {form.animalName}
+            </p>
+            <p>
+              <strong>Incident Date:</strong> {form.incidentDate}
+            </p>
+            <button
+              className="view-button"
+              onClick={() => handleViewFullApplication(form.formID)}
+            >
+              View Full Application
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

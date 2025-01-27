@@ -1,25 +1,46 @@
 /* Main container styling */
-.form-container .form-container {
-  display: flex;
-  flex-direction: column;
+.container3 {
+  background-color: #f9f9ff;
+  height: 95vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.container3 .sidebar{
+  width: 100%;
+  background-color: #dbdbff;
+}
+
+.container3 .sidebar ul{
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-weight: 400;
+  color: black;
+  list-style: none;
+}
+
+.container3 .form-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
-  background-color: #f9f9ff;
 }
 
 /* Card styling */
-.form-container .form-card {
+.container3 .form-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 600px;
+  width: max-content;
+  height: max-content;
   margin: 0 auto;
 }
 
 /* Title styling */
-.form-container .form-title {
+.container3 .form-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: #1f2937;
@@ -27,14 +48,14 @@
 }
 
 /* Paragraph styling */
-.form-container .form-card p {
+.container3 .form-card p {
   font-size: 1rem;
   color: #4b5563;
   margin: 5px 0;
 }
 
 /* Button styling */
-.form-container .view-button {
+.container3 .view-button {
   background-color: #6366f1;
   color: white;
   padding: 10px 20px;
@@ -45,6 +66,6 @@
   transition: background-color 0.3s;
 }
 
-.form-container .view-button:hover {
+.container3 .view-button:hover {
   background-color: #4f46e5;
 }

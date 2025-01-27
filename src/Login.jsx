@@ -33,7 +33,9 @@ function App() {
         if (result.message === "Verified") {
           setMessage("Login successful!");
           // Navigate to the dashboard or desired page after successful login
-          navigate("/List"); // Replace '/dashboard' with your desired path
+          setTimeout(()=>{
+            navigate("/List");
+          }, 1000); // Replace '/dashboard' with your desired path
         } else {
           setMessage("Login failed. Invalid Guard ID or Mobile Number.");
         }
