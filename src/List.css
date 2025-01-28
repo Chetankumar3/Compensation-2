@@ -11,13 +11,38 @@
   background-color: #dbdbff;
 }
 
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(120px); }
+}
+
 .container3 .sidebar ul{
-  font-size: 20px;
-  margin-top: 20px;
-  padding: 12px 20px;
-  font-weight: 400;
-  color: black;
+  margin-top: 1.8em;
+  width: 100%;
   list-style: none;
+}
+
+.container3 .sidebar ul button{
+  width: 100%;
+  font-weight: 450;
+  color: black;
+  font-size: 1.2em;
+  border: none;
+  padding: 5px 0;
+  background-color: transparent;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.container3 .sidebar ul button:hover{
+  cursor: pointer;
+  background-color: #f6f6ff;
+}
+
+.container3 .outer .title{
+  color: black;
+  margin-top: 0.6em;
+  margin-left: 1em;
 }
 
 .container3 .form-container{
@@ -25,9 +50,9 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
+  color: black;
 }
 
-/* Card styling */
 .container3 .form-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;

@@ -2,14 +2,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
-    padding: 6px;
+    background-color: #0f0842;
+    padding: 5px;
     border-bottom: 1px solid #ddd;
-    width: 98.7vw;
+    width: 98.85vw;
 }
 
 header h1 {
     font-size: 1.4em;
+    color: white;
+    font-weight: 600;
 }
 
 .logo {
@@ -18,8 +20,22 @@ header h1 {
 }
 
 .logo img {
-    width: 70px;
+    width: 50px;
     margin-right: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings svg{
+    fill: rgb(255, 255, 255);
+    width: 30px;
+    margin-right: 15px;
 }
 
 .settings a {

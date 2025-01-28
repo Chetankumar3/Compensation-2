@@ -19,7 +19,7 @@ const ApplicationVerification = () => {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <div className="container4 Loading">Loading...</div>;
   }
 
   return (
