@@ -6,6 +6,7 @@ function App() {
   const [guardId, setGuardId] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [message, setMessage] = useState("");
+  const [color, setColor] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLogin = async (e) => {
@@ -31,6 +32,7 @@ function App() {
       if (response.ok) {
         const result = await response.json();
         if (result.message === "Verified") {
+          setColor("#228B22");
           setMessage("Login successful!");
           // Navigate to the dashboard or desired page after successful login
           setTimeout(()=>{
@@ -43,6 +45,7 @@ function App() {
         setMessage("Login failed. Server error.");
       }
     } catch (error) {
+      setColor("#B22222");
       setMessage("Login failed. Network error.");
     }
   };
@@ -94,7 +97,7 @@ function App() {
             </a>
           </p>
         </form>
-        {message && <p className="message">{message}</p>}
+        {message && <p className="message" style={{ color }}>{message}</p>}
       </div>
     </>
   );

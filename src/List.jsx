@@ -5,8 +5,8 @@ import './List.css';
 
 const FormDetails = () => {
   const [forms, setForms] = useState([]);
-  const [currLevel, setcurrLevel] = useState([]); // New state for inView forms
-  const [inView, setInView] = useState([]); // New state for inView forms
+  const [currLevel, setCurrLevel] = useState(1); // Initialize currLevel to 1
+  const [inView, setInView] = useState([]); // State for inView forms
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,22 +22,22 @@ const FormDetails = () => {
   };
 
   const handlePendingClick = () => {
-    const temp = forms.filter((form) => form.status > CurrLevel);
+    const temp = forms.filter((form) => (form.status > currLevel) && form.status != 4);
     setInView(temp);
   };
 
   const handlePendingForYouClick = () => {
-    const temp = forms.filter((form) => form.status === currLevel);
+    const temp = forms.filter((form) => form.status == currLevel);
     setInView(temp);
   };
 
   const handleAcceptedClick = () => {
-    const temp = forms.filter((form) => form.status === "" || form.status === 4);
+    const temp = forms.filter((form) => form.status == 4);
     setInView(temp);
   };
 
   const handleRejectedClick = () => {
-    const temp = forms.filter((form) => form.status === -1);
+    const temp = forms.filter((form) => form.status == -1);
     setInView(temp);
   };
 

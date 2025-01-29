@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {useParams} from 'react-router-dom'
-
-import './Form.css'
+import { useParams } from 'react-router-dom';
+import './Form.css';
 
 const ApplicationVerification = () => {
-  const [data, setData] = useState(null);
-  const params = useParams() // Aadhaar number to search for
-  console.log(params.formID)
+  const [data, setData] = useState(0);
+  const [FormID, setFormID] = useState(0);
+  const params = useParams();
+
+  useEffect(() => {
+    // const newFormID = params.formID;
+    // if (newFormID != FormID) {
+      setFormID(params.formID);  // Only update state if FormID has changed
+    // }
+  }, [params.formID]);  // Only depend on params.formID
 
   useEffect(() => {
     fetch("https://web-production-5485.up.railway.app/compensationform/shrey")
@@ -16,7 +22,25 @@ const ApplicationVerification = () => {
         setData(matchedData);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  }, [params.formID]);
+
+  const handlingButtons = (action) => {
+    // console.log(FormID);
+    return () => {
+      fetch(`https://web-production-5485.up.railway.app/update_form_status/${FormID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emp_id: params.formID,
+          action: action,
+        }),
+      })
+        .then(response => response.json())
+        .catch((error) => console.error("Error updating Status:", error));
+    };
+  };
 
   if (!data) {
     return <div className="container4 Loading">Loading...</div>;
@@ -94,14 +118,13 @@ const ApplicationVerification = () => {
           <div className="section">
             <h2>Comments</h2>
             <textarea placeholder="Add your comments here..." className="textarea"></textarea>
-            
+
             <div className="buttons">
-              <button className="btn reject">Reject</button>
-              <button className="btn approve">Approve</button>
-              <button className="btn send-back">Send Back</button>
+              <button className="btn reject" onClick={handlingButtons("reject")}>Reject</button>
+              <button className="btn approve" onClick={handlingButtons("accept")}>Approve</button>
+              <button className="btn send-back" onClick={handlingButtons("send_back")}>Send Back</button>
             </div>
           </div>
-
         </div>
       </div>
     </div>

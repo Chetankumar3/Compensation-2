@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 92vh;
   background-color: rgb(239, 239, 239);
   color: black;
 }
@@ -12,11 +12,12 @@
 .container h1{
   font-weight: 550;
   margin-bottom: 16px;
+  font-size: 2.2em;
 }
 
 .container .logo {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   margin-bottom: 20px;
 }
 
