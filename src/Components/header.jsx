@@ -23,7 +23,7 @@ const header = ({ LoggedIn }) => {
       if (employee.mobile_number !== MobNo) setMobNo(employee.mobile_number);
       if(!loading) setLoading(true);
     }
-  }, []);
+  }, [LoggedIn]);
 
   const toggleSidebar = () => {
     if (profileRef.current.className === "profile open") profileRef.current.className = "profile";
