@@ -8,14 +8,21 @@ const header = ({ LoggedIn }) => {
   const [MobNo, setMobNo] = useState("q");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("no");
+  const [employee, setemployee] = useState({
+    Name: "---",
+    beat: null,
+    division: "--",
+    emp_id: "--",
+    mobile_number: "--",
+    range_: "--",
+  });
 
-  let employee = "z";
-  useEffect(()=>{
-    if(LoggedIn){
-      employee = JSON.parse(localStorage.getItem("employeeData"));
-      if( employee.mobile_number !== MobNo ) setMobNo(employee.mobile_number);
+  useEffect(() => {
+    if (LoggedIn) {
+      setemployee( JSON.parse(localStorage.getItem("employeeData")) );
+      if (employee.mobile_number !== MobNo) setMobNo(employee.mobile_number);
       setLoading(true);
-    }    
+    }
   }, []);
 
   const toggleSidebar = () => {
@@ -31,7 +38,7 @@ const header = ({ LoggedIn }) => {
         <h1>CHHATISGARH COMPENSATION</h1>
       </div>
 
-      {LoggedIn && loading ? (
+      {LoggedIn ? (
         <>
           <div className="right">
             <a href="#" id='profile' onClick={toggleSidebar}>
@@ -47,7 +54,7 @@ const header = ({ LoggedIn }) => {
           </div>
 
           <div className="profile" ref={profileRef} onClick={toggleSidebar}>
-            {error ? (
+            {error && loading ? (
               <div className="employee-card">
                 <h2>Profile Information</h2>
                 <div className="info">
@@ -77,7 +84,7 @@ const header = ({ LoggedIn }) => {
                   </div>
                 </div>
               </div>
-            ) : (<div>{error}</div>)}
+            ) : (<div>Loading...</div>)}
 
           </div>
         </>
