@@ -7,7 +7,6 @@ const header = ({ LoggedIn }) => {
   const profileRef = useRef(null);
   const [MobNo, setMobNo] = useState("q");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("no");
   const [employee, setemployee] = useState({
     Name: "---",
     beat: null,
@@ -18,10 +17,11 @@ const header = ({ LoggedIn }) => {
   });
 
   useEffect(() => {
+    // console.log(LoggedIn);
     if (LoggedIn) {
       setemployee( JSON.parse(localStorage.getItem("employeeData")) );
       if (employee.mobile_number !== MobNo) setMobNo(employee.mobile_number);
-      setLoading(true);
+      if(!loading) setLoading(true);
     }
   }, []);
 
@@ -54,7 +54,7 @@ const header = ({ LoggedIn }) => {
           </div>
 
           <div className="profile" ref={profileRef} onClick={toggleSidebar}>
-            {error && loading ? (
+            {loading ? (
               <div className="employee-card">
                 <h2>Profile Information</h2>
                 <div className="info">

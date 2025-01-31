@@ -1,7 +1,7 @@
 .container4{
   font-family: Arial, sans-serif;
   width: 98.7vw;
-  height: 100vh;
+  min-height: 100vh;
   margin: auto;
   padding: 20px;
   background-color: #ffffff;
@@ -24,7 +24,7 @@
   box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 12px 16px;
-  height: 275px;
+  /* height: 275px; */
 }
 
 .container4 .section h2 {
@@ -35,20 +35,21 @@
 
 .container4 .details {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 7fr 6fr;
   gap: 12px;
 }
 
 .container4 .left {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, max-content);
   gap: 12px;
 }
 
 .container4 .right {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 12px;
+  width: 97%;
+  height: 100%;
+  border: 2px solid black;
 }
 
 .container4 .grid {
@@ -59,7 +60,7 @@
 
 .container4 .textarea {
   width: 100%;
-  min-height: 100px;
+  min-height: 130px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;

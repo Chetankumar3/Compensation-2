@@ -50,7 +50,7 @@ const ApplicationVerification = () => {
 
   return (
     <div className="container4">
-      <h1 className="header">Application Verification {params.formID}</h1>
+      <h1 className="header">Application Verification: {params.formID}</h1>
 
       <div className="details">
         <div className="left">
@@ -100,9 +100,7 @@ const ApplicationVerification = () => {
               <div className="field">PAN Number: {data.panNumber}</div>
             </div>
           </div>
-        </div>
 
-        <div className="right">
           <div className="section">
             <h2>Verification & Status</h2>
             <div className="grid">
@@ -129,6 +127,11 @@ const ApplicationVerification = () => {
             </div>
           </div>
         </div>
+
+        {/* <div className="right"> */}
+          {/* <iframe className="right" src={`https://drive.google.com/file/d/1SjBtVtx0tFqnCWeMt4GU9lES0WywMK58/preview`} frameborder="0"></iframe> */}
+          <iframe className="right" src={`${data.documentURL}#navbar=0`} frameborder="0"></iframe>
+        {/* </div> */}
       </div>
     </div>
   );
