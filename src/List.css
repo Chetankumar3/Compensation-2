@@ -29,12 +29,15 @@
   font-size: 1.2em;
   border: none;
   padding: 5px 0;
-  background-color: transparent;
   text-align: left;
   padding-left: 1.5em;
 }
 
-.container3 .sidebar ul button:hover{
+.container3 .deactivated{
+  background-color: transparent;
+}
+
+.container3 .sidebar ul button:hover, .container3 .activated{
   cursor: pointer;
   background-color: #f6f6ff;
 }
@@ -91,6 +94,6 @@
   transition: background-color 0.3s;
 }
 
-.container3 .view-button:hover {
+.container3 .view-button:hover{
   background-color: #4f46e5;
 }

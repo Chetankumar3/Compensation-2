@@ -9,6 +9,11 @@ const FormDetails = () => {
   const [inView, setInView] = useState([]); // State for inView forms
   const navigate = useNavigate();
 
+  let pendingForYou = document.getElementById("pendingForyou");
+  let pending = document.getElementById("pending");
+  let accepted = document.getElementById("accepted");
+  let rejected = document.getElementById("rejected");
+
   useEffect(() => {
     // Fetch data from the API
     fetch("https://web-production-5485.up.railway.app/compensationform/shrey")
@@ -22,21 +27,37 @@ const FormDetails = () => {
   };
 
   const handlePendingClick = () => {
+    pending.className = "activated";
+    pendingForYou.className = "deactivated";
+    accepted.className = "deactivated";
+    rejected.className = "deactivated";
     const temp = forms.filter((form) => (form.status > currLevel) && form.status != 4);
     setInView(temp);
   };
-
+  
   const handlePendingForYouClick = () => {
+    pendingForYou.className = "activated";
+    pending.className = "deactivated";
+    accepted.className = "deactivated";
+    rejected.className = "deactivated";
     const temp = forms.filter((form) => form.status == currLevel);
     setInView(temp);
   };
-
+  
   const handleAcceptedClick = () => {
+    accepted.className = "activated";
+    pendingForYou.className = "deactivated";
+    pending.className = "deactivated";
+    rejected.className = "deactivated";
     const temp = forms.filter((form) => form.status == 4);
     setInView(temp);
   };
-
+  
   const handleRejectedClick = () => {
+    rejected.className = "activated";
+    pendingForYou.className = "deactivated";
+    pending.className = "deactivated";
+    accepted.className = "deactivated";
     const temp = forms.filter((form) => form.status == -1);
     setInView(temp);
   };
@@ -46,16 +67,16 @@ const FormDetails = () => {
       <div className="sidebar">
         <ul>
           <li>
-            <button onClick={handlePendingForYouClick}>Pending (For You) <strong>&#8594;</strong> </button>
+            <button id="pendingForyou" className="deactivated" onClick={handlePendingForYouClick}>Pending (For You) <strong>&#8594;</strong> </button>
           </li>
           <li>
-            <button onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
+            <button id="pending" className="deactivated" onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button onClick={handleAcceptedClick}>Accepted <strong>&#8594;</strong></button>
+            <button id="accepted" className="deactivated" onClick={handleAcceptedClick}>Accepted <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button onClick={handleRejectedClick}>Rejected <strong>&#8594;</strong></button>
+            <button id="rejected" className="deactivated" onClick={handleRejectedClick}>Rejected <strong>&#8594;</strong></button>
           </li>
         </ul>
       </div>

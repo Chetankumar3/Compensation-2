@@ -5,6 +5,7 @@ import './Form.css';
 const ApplicationVerification = () => {
   const [data, setData] = useState(0);
   const [FormID, setFormID] = useState(0);
+  const [Comments, setComments] = useState("");
   const params = useParams();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const ApplicationVerification = () => {
         body: JSON.stringify({
           emp_id: params.formID,
           action: action,
+          comments: Comments,
         }),
       })
         .then(response => response.json())
@@ -109,6 +111,7 @@ const ApplicationVerification = () => {
               <div className="field">Verified By: {data.verifiedBy}</div>
               <div className="field">Payment Processed By: {data.paymentProcessedBy}</div>
               <div className="field">Status: {data.status || "Pending"}</div>
+              <div className="field">Message for not approval: <strong className="comments">{data.comments || "Pending"}</strong></div>
             </div>
             <a href={data.documentURL} target="_blank" rel="noopener noreferrer">
               View/Download Document
@@ -117,7 +120,7 @@ const ApplicationVerification = () => {
 
           <div className="section">
             <h2>Comments</h2>
-            <textarea placeholder="Add your comments here..." className="textarea"></textarea>
+            <textarea value = {Comments} onChange={(e)=>{ setComments(e.target.value) }} placeholder="Add your comments here..." className="textarea"></textarea>
 
             <div className="buttons">
               <button className="btn reject" onClick={handlingButtons("reject")}>Reject</button>

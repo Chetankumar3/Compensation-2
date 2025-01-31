@@ -10,15 +10,15 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Header /><Login /></>
+      element: <><Header LoggedIn = {false}/><Login /></>
     },
     {
       path: "/List",
-      element: <><Header /><List /></>
+      element: <><Header LoggedIn = {true}/><List /></>
     },
     {
       path: "/Form/:formID",
-      element: <><Header /><Form /></>
+      element: <><Header LoggedIn = {true}/><Form /></>
     }
   ])
   return (
