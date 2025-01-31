@@ -7,6 +7,7 @@ const FormDetails = () => {
   const [forms, setForms] = useState([]);
   const [currLevel, setCurrLevel] = useState(1); // Initialize currLevel to 1
   const [inView, setInView] = useState([]); // State for inView forms
+  const [currentFilter, setCurrentFilter] = useState("Pending (for you)");
   const navigate = useNavigate();
 
   let pendingForYou = document.getElementById("pendingForyou");
@@ -20,6 +21,8 @@ const FormDetails = () => {
       .then((response) => response.json())
       .then((data) => setForms(data))
       .catch((error) => console.error("Error fetching data:", error));
+      const temp = forms.filter((form) => (form.status > currLevel) && form.status != 4);
+      setInView(temp);
   }, []);
 
   const handleViewFullApplication = (formID) => {
@@ -27,6 +30,7 @@ const FormDetails = () => {
   };
 
   const handlePendingClick = () => {
+    setCurrentFilter("Pending");
     pending.className = "activated";
     pendingForYou.className = "deactivated";
     accepted.className = "deactivated";
@@ -36,6 +40,7 @@ const FormDetails = () => {
   };
   
   const handlePendingForYouClick = () => {
+    setCurrentFilter("Pending (For You)");
     pendingForYou.className = "activated";
     pending.className = "deactivated";
     accepted.className = "deactivated";
@@ -43,8 +48,9 @@ const FormDetails = () => {
     const temp = forms.filter((form) => form.status == currLevel);
     setInView(temp);
   };
-  
+
   const handleAcceptedClick = () => {
+    setCurrentFilter("Accepted");
     accepted.className = "activated";
     pendingForYou.className = "deactivated";
     pending.className = "deactivated";
@@ -52,8 +58,9 @@ const FormDetails = () => {
     const temp = forms.filter((form) => form.status == 4);
     setInView(temp);
   };
-  
+
   const handleRejectedClick = () => {
+    setCurrentFilter("Rejected");
     rejected.className = "activated";
     pendingForYou.className = "deactivated";
     pending.className = "deactivated";
@@ -67,7 +74,7 @@ const FormDetails = () => {
       <div className="sidebar">
         <ul>
           <li>
-            <button id="pendingForyou" className="deactivated" onClick={handlePendingForYouClick}>Pending (For You) <strong>&#8594;</strong> </button>
+            <button id="pendingForyou" className="activated" onClick={handlePendingForYouClick}>Pending (For You) <strong>&#8594;</strong> </button>
           </li>
           <li>
             <button id="pending" className="deactivated" onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
@@ -82,10 +89,10 @@ const FormDetails = () => {
       </div>
 
       <div className="outer">
-        <h2 className="title">In View Forms</h2>
+        <h2 className="title">{currentFilter} Forms</h2>
         <div className="form-container">
           {inView.length === 0 ? (
-            <div> <p>No forms are currently in view.</p> </div>
+            <div> <p>No forms.</p> </div>
           ) : (
             inView.map((form) => (
               <div key={form.formID} className="form-card">

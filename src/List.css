@@ -3,12 +3,12 @@
   background-color: #f9f9ff;
   height: 95vh;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 2fr 9fr;
 }
 
 .container3 .sidebar{
   width: 100%;
-  background-color: #dbdbff;
+  background-color: #cecbff;
 }
 
 @keyframes slide {

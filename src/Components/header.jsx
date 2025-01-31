@@ -19,9 +19,9 @@ const header = ({ LoggedIn }) => {
   useEffect(() => {
     // console.log(LoggedIn);
     if (LoggedIn) {
-      setemployee( JSON.parse(localStorage.getItem("employeeData")) );
+      setemployee(JSON.parse(localStorage.getItem("employeeData")));
       if (employee.mobile_number !== MobNo) setMobNo(employee.mobile_number);
-      if(!loading) setLoading(true);
+      if (!loading) setLoading(true);
     }
   }, [LoggedIn]);
 
@@ -55,35 +55,37 @@ const header = ({ LoggedIn }) => {
 
           <div className="profile" ref={profileRef} onClick={toggleSidebar}>
             {loading ? (
-              <div className="employee-card">
-                <h2>Profile Information</h2>
-                <div className="info">
-                  <div className="info-item">
-                    <span className="label">Employee ID:</span>
-                    <span className="value">{employee.emp_id}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="label">Name:</span>
-                    <span className="value">{employee.Name}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="label">Mobile Number:</span>
-                    <span className="value">{employee.mobile_number}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="label">Division:</span>
-                    <span className="value">{employee.division}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="label">Range:</span>
-                    <span className="value">{employee.range_}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="label">Beat:</span>
-                    <span className="value">{employee.beat}</span>
+              <>
+                <div className="employee-card">
+                  <h2>Profile Information</h2>
+                  <div className="info">
+                    <div className="info-item">
+                      <span className="label">Employee ID:</span>
+                      <span className="value">{employee.emp_id}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Name:</span>
+                      <span className="value">{employee.Name}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Mobile Number:</span>
+                      <span className="value">{employee.mobile_number}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Division:</span>
+                      <span className="value">{employee.division}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Range:</span>
+                      <span className="value">{employee.range_}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Beat:</span>
+                      <span className="value">{employee.beat}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             ) : (<div>Loading...</div>)}
 
           </div>
