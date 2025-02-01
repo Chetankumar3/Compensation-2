@@ -98,3 +98,54 @@
 .container4 .btn.send-back {
   background-color: #2249bd;
 }
+
+/* Pop-up */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-actions {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.cancel-btn {
+  background-color: #f44336; /* Red for cancel */
+  color: white;
+}
+
+.confirm-btn {
+  background-color: #4caf50; /* Green for confirm */
+  color: white;
+}
+
+/* Optional: Add hover effect */
+.btn:hover {
+  opacity: 0.8;
+}

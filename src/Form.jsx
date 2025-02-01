@@ -6,14 +6,13 @@ const ApplicationVerification = () => {
   const [data, setData] = useState(0);
   const [FormID, setFormID] = useState(0);
   const [Comments, setComments] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [Decision, setDecision] = useState("");
   const params = useParams();
 
   useEffect(() => {
-    // const newFormID = params.formID;
-    // if (newFormID != FormID) {
-      setFormID(params.formID);  // Only update state if FormID has changed
-    // }
-  }, [params.formID]);  // Only depend on params.formID
+    setFormID(params.formID);
+  }, [params.formID]);
 
   useEffect(() => {
     fetch("https://web-production-5485.up.railway.app/compensationform/shrey")
@@ -26,7 +25,6 @@ const ApplicationVerification = () => {
   }, [params.formID]);
 
   const handlingButtons = (action) => {
-    // console.log(FormID);
     return () => {
       fetch(`https://web-production-5485.up.railway.app/update_form_status/${FormID}`, {
         method: "POST",
@@ -42,6 +40,21 @@ const ApplicationVerification = () => {
         .then(response => response.json())
         .catch((error) => console.error("Error updating Status:", error));
     };
+  };
+
+  const handleClosePopup = () => {
+    // console.log(isOpen);
+    if(isOpen) setIsOpen(false);
+  };
+  const handlePopup = (temp) => {
+    console.log(temp);
+    if(!isOpen) setIsOpen(true);
+    if(Decision !== temp) setDecision(temp);
+  };
+  
+  const handleConfirm = () => {
+    handlingButtons(Decision);
+    if(isOpen) setIsOpen(false);
   };
 
   if (!data) {
@@ -121,9 +134,9 @@ const ApplicationVerification = () => {
             <textarea value = {Comments} onChange={(e)=>{ setComments(e.target.value) }} placeholder="Add your comments here..." className="textarea"></textarea>
 
             <div className="buttons">
-              <button className="btn reject" onClick={handlingButtons("reject")}>Reject</button>
-              <button className="btn approve" onClick={handlingButtons("accept")}>Approve</button>
-              <button className="btn send-back" onClick={handlingButtons("send_back")}>Send Back</button>
+              <button className="btn reject" onClick={() => {handlePopup("reject")}}>Reject</button>
+              <button className="btn approve" onClick={() => {handlePopup("accept")}}>Approve</button>
+              <button className="btn send-back" onClick={() => {handlePopup("send_back")}}>Send Back</button>
             </div>
           </div>
         </div>
@@ -133,6 +146,22 @@ const ApplicationVerification = () => {
           <iframe className="right" src={`${data.documentURL}#navbar=0`} frameborder="0"></iframe>
         {/* </div> */}
       </div>
+
+      {isOpen && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>Are you sure? This can't be reverted back.</p>
+            <div className="popup-actions">
+              <button onClick={handleClosePopup} className="btn cancel-btn">
+                Cancel
+              </button>
+              <button onClick={handleConfirm} className="btn confirm-btn">
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
