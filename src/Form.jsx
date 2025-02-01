@@ -47,7 +47,7 @@ const ApplicationVerification = () => {
     if(isOpen) setIsOpen(false);
   };
   const handlePopup = (temp) => {
-    console.log(temp);
+    // console.log(temp);
     if(!isOpen) setIsOpen(true);
     if(Decision !== temp) setDecision(temp);
   };
@@ -63,7 +63,7 @@ const ApplicationVerification = () => {
 
   return (
     <div className="container4">
-      <h1 className="header">Application Verification: {params.formID}</h1>
+      <h1 className="header">Application Verification: {data.formID}</h1>
 
       <div className="details">
         <div className="left">
@@ -143,7 +143,7 @@ const ApplicationVerification = () => {
 
         {/* <div className="right"> */}
           {/* <iframe className="right" src={`https://drive.google.com/file/d/1SjBtVtx0tFqnCWeMt4GU9lES0WywMK58/preview`} frameborder="0"></iframe> */}
-          <iframe className="right" src={`${data.documentURL}#navbar=0`} frameborder="0"></iframe>
+          <iframe className="right" src={`${data.documentURL}#navbar=0`}></iframe>
         {/* </div> */}
       </div>
 
