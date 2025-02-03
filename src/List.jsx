@@ -5,85 +5,69 @@ import './List.css';
 
 const FormDetails = () => {
   const [forms, setForms] = useState([]);
-  const [currLevel, setCurrLevel] = useState(1); // Initialize currLevel to 1
-  const [inView, setInView] = useState([]); // State for inView forms
-  const [currentFilter, setCurrentFilter] = useState("Pending (for you)");
+  const [currLevel, setCurrLevel] = useState(0);
+  const [inView, setInView] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState("Loading");
+  const [Loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  let pendingForYou = document.getElementById("pendingForyou");
-  let pending = document.getElementById("pending");
-  let accepted = document.getElementById("accepted");
-  let rejected = document.getElementById("rejected");
-
   useEffect(() => {
-    // Fetch data from the API
     fetch("https://web-production-5485.up.railway.app/compensationform/shrey")
       .then((response) => response.json())
       .then((data) => setForms(data))
       .catch((error) => console.error("Error fetching data:", error));
-      const temp = forms.filter((form) => (form.status > currLevel) && form.status != 4);
-      setInView(temp);
   }, []);
+
+  useEffect(() => {
+    handlePendingForYouClick();
+  }, [forms]);
 
   const handleViewFullApplication = (formID) => {
     navigate(`/Form/${formID}`);
   };
 
   const handlePendingClick = () => {
+    setInView( forms.filter((form) => (form.status > currLevel) && form.status != 4) );
     setCurrentFilter("Pending");
-    pending.className = "activated";
-    pendingForYou.className = "deactivated";
-    accepted.className = "deactivated";
-    rejected.className = "deactivated";
-    const temp = forms.filter((form) => (form.status > currLevel) && form.status != 4);
-    setInView(temp);
   };
-  
+
   const handlePendingForYouClick = () => {
+    setInView( forms.filter((form) => form.status == currLevel) );
     setCurrentFilter("Pending (For You)");
-    pendingForYou.className = "activated";
-    pending.className = "deactivated";
-    accepted.className = "deactivated";
-    rejected.className = "deactivated";
-    const temp = forms.filter((form) => form.status == currLevel);
-    setInView(temp);
   };
 
   const handleAcceptedClick = () => {
+    setInView( forms.filter((form) => form.status == 4) );
     setCurrentFilter("Accepted");
-    accepted.className = "activated";
-    pendingForYou.className = "deactivated";
-    pending.className = "deactivated";
-    rejected.className = "deactivated";
-    const temp = forms.filter((form) => form.status == 4);
-    setInView(temp);
   };
 
   const handleRejectedClick = () => {
+    setInView( forms.filter((form) => form.status == -1) );
     setCurrentFilter("Rejected");
-    rejected.className = "activated";
-    pendingForYou.className = "deactivated";
-    pending.className = "deactivated";
-    accepted.className = "deactivated";
-    const temp = forms.filter((form) => form.status == -1);
-    setInView(temp);
   };
+
+  useEffect(() => {
+    setTimeout(()=>{
+      if(Loading) setLoading(false);
+    }, 1200);
+  }, [inView]);
 
   return (
     <div className="container3">
       <div className="sidebar">
         <ul>
           <li>
-            <button id="pendingForyou" className="activated" onClick={() => {handlePendingForYouClick()} }>Pending (For You) <strong>&#8594;</strong> </button>
+            <button id="pendingForyou" className={currentFilter === "Pending (For You)" ? "activated" : "deactivated"}
+              onClick={handlePendingForYouClick}> Pending (For You) <strong>&#8594;</strong> </button>
           </li>
           <li>
-            <button id="pending" className="deactivated" onClick={() => {handlePendingClick()} }>Pending <strong>&#8594;</strong></button>
+            <button id="pending" className={currentFilter === "Pending" ? "activated" : "deactivated"} onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="accepted" className="deactivated" onClick={() => {handleAcceptedClick()} }>Accepted <strong>&#8594;</strong></button>
+            <button id="accepted" className={currentFilter === "Accepted" ? "activated" : "deactivated"} onClick={handleAcceptedClick}>Accepted <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="rejected" className="deactivated" onClick={() => {handleRejectedClick()} }>Rejected <strong>&#8594;</strong></button>
+            <button id="rejected" className={currentFilter === "Rejected" ? "activated" : "deactivated"} onClick={handleRejectedClick}>Rejected <strong>&#8594;</strong></button>
           </li>
         </ul>
       </div>
@@ -91,7 +75,9 @@ const FormDetails = () => {
       <div className="outer">
         <h2 className="title">{currentFilter} Forms</h2>
         <div className="form-container">
-          {inView.length === 0 ? (
+          {Loading ? (
+            <div> <p>Loading...</p> </div>
+          ) : inView.length === 0 ? (
             <div> <p>No forms.</p> </div>
           ) : (
             inView.map((form) => (
