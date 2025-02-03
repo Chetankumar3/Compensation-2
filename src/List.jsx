@@ -74,16 +74,16 @@ const FormDetails = () => {
       <div className="sidebar">
         <ul>
           <li>
-            <button id="pendingForyou" className="activated" onClick={handlePendingForYouClick}>Pending (For You) <strong>&#8594;</strong> </button>
+            <button id="pendingForyou" className="activated" onClick={() => {handlePendingForYouClick()} }>Pending (For You) <strong>&#8594;</strong> </button>
           </li>
           <li>
-            <button id="pending" className="deactivated" onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
+            <button id="pending" className="deactivated" onClick={() => {handlePendingClick()} }>Pending <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="accepted" className="deactivated" onClick={handleAcceptedClick}>Accepted <strong>&#8594;</strong></button>
+            <button id="accepted" className="deactivated" onClick={() => {handleAcceptedClick()} }>Accepted <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="rejected" className="deactivated" onClick={handleRejectedClick}>Rejected <strong>&#8594;</strong></button>
+            <button id="rejected" className="deactivated" onClick={() => {handleRejectedClick()} }>Rejected <strong>&#8594;</strong></button>
           </li>
         </ul>
       </div>

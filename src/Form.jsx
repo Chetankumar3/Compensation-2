@@ -11,7 +11,7 @@ const ApplicationVerification = () => {
   const params = useParams();
 
   useEffect(() => {
-    setFormID(params.formID);
+    if (params.formID !== FormID) setFormID(params.formID);
   }, [params.formID]);
 
   useEffect(() => {
@@ -25,36 +25,37 @@ const ApplicationVerification = () => {
   }, [params.formID]);
 
   const handlingButtons = (action) => {
-    return () => {
-      fetch(`https://web-production-5485.up.railway.app/update_form_status/${FormID}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          emp_id: params.formID,
-          action: action,
-          comments: Comments,
-        }),
-      })
-        .then(response => response.json())
-        .catch((error) => console.error("Error updating Status:", error));
-    };
+    fetch(`https://web-production-5485.up.railway.app/update_form_status/${FormID}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emp_id: FormID,
+        action: action,
+        comments: Comments,
+      }),
+    })
+      .then(response => response.json())
+      .catch((error) => console.error("Error updating Status:", error));
   };
 
   const handleClosePopup = () => {
-    // console.log(isOpen);
-    if(isOpen) setIsOpen(false);
+    // console.log("Close Pop up called");
+    if (isOpen) setIsOpen(false);
   };
   const handlePopup = (temp) => {
     // console.log(temp);
-    if(!isOpen) setIsOpen(true);
-    if(Decision !== temp) setDecision(temp);
+    if (!isOpen) setIsOpen(true);
+    if (Decision !== temp) setDecision(temp);
   };
-  
+
   const handleConfirm = () => {
+    // console.log("Decision: ");
+    // console.log(Decision);
+    // console.log("Done...");
     handlingButtons(Decision);
-    if(isOpen) setIsOpen(false);
+    if (isOpen) setIsOpen(false);
   };
 
   if (!data) {
@@ -131,19 +132,19 @@ const ApplicationVerification = () => {
 
           <div className="section">
             <h2>Comments</h2>
-            <textarea value = {Comments} onChange={(e)=>{ setComments(e.target.value) }} placeholder="Add your comments here..." className="textarea"></textarea>
+            <textarea value={Comments} onChange={(e) => { setComments(e.target.value) }} placeholder="Add your comments here..." className="textarea"></textarea>
 
             <div className="buttons">
-              <button className="btn reject" onClick={() => {handlePopup("reject")}}>Reject</button>
-              <button className="btn approve" onClick={() => {handlePopup("accept")}}>Approve</button>
-              <button className="btn send-back" onClick={() => {handlePopup("send_back")}}>Send Back</button>
+              <button className="btn reject" onClick={() => { handlePopup("reject") }}>Reject</button>
+              <button className="btn approve" onClick={() => { handlePopup("accept") }}>Approve</button>
+              <button className="btn send-back" onClick={() => { handlePopup("send_back") }}>Send Back</button>
             </div>
           </div>
         </div>
 
         {/* <div className="right"> */}
-          {/* <iframe className="right" src={`https://drive.google.com/file/d/1SjBtVtx0tFqnCWeMt4GU9lES0WywMK58/preview`} frameborder="0"></iframe> */}
-          <iframe className="right" src={`${data.documentURL}#navbar=0`}></iframe>
+        {/* <iframe className="right" src={`https://drive.google.com/file/d/1SjBtVtx0tFqnCWeMt4GU9lES0WywMK58/preview`} frameborder="0"></iframe> */}
+        <iframe className="right" src={`${data.documentURL}#navbar=0`}></iframe>
         {/* </div> */}
       </div>
 
@@ -152,10 +153,10 @@ const ApplicationVerification = () => {
           <div className="popup-content">
             <p>Are you sure? This can't be reverted back.</p>
             <div className="popup-actions">
-              <button onClick={handleClosePopup} className="btn cancel-btn">
+              <button onClick={() => { handleClosePopup() }} className="btn cancel-btn">
                 Cancel
               </button>
-              <button onClick={handleConfirm} className="btn confirm-btn">
+              <button onClick={() => { handleConfirm() }} className="btn confirm-btn">
                 Confirm
               </button>
             </div>
