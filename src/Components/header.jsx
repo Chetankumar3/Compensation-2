@@ -8,16 +8,19 @@ const header = ({ LoggedIn }) => {
   const [MobNo, setMobNo] = useState("q");
   const [loading, setLoading] = useState(false);
   const [employee, setemployee] = useState({
-    Name: "---",
-    beat: null,
-    division: "--",
     emp_id: "--",
+    Name: "---",
     mobile_number: "--",
+    Circle_CG: "--",
+    Circle1: "--",
+    roll: "--",
+    division: "--",
+    subdivision: "--",
     range_: "--",
+    beat: null,
   });
 
   useEffect(() => {
-    // console.log(LoggedIn);
     if (LoggedIn) {
       setemployee(JSON.parse(localStorage.getItem("employeeData")));
       if (employee.mobile_number !== MobNo) setMobNo(employee.mobile_number);
@@ -72,8 +75,24 @@ const header = ({ LoggedIn }) => {
                       <span className="value">{employee.mobile_number}</span>
                     </div>
                     <div className="info-item">
+                      <span className="label">Role:</span>
+                      <span className="value">{employee.role}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Circle_CG:</span>
+                      <span className="value">{employee.Circle_CG}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Circle1:</span>
+                      <span className="value">{employee.Circle1}</span>
+                    </div>
+                    <div className="info-item">
                       <span className="label">Division:</span>
                       <span className="value">{employee.division}</span>
+                    </div>
+                    <div className="info-item">
+                      <span className="label">Sub-Division:</span>
+                      <span className="value">{employee.subdivision}</span>
                     </div>
                     <div className="info-item">
                       <span className="label">Range:</span>

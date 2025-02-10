@@ -5,14 +5,19 @@ import './List.css';
 
 const FormDetails = () => {
   const [forms, setForms] = useState([]);
-  const [currLevel, setCurrLevel] = useState(0);
   const [inView, setInView] = useState([]);
   const [currentFilter, setCurrentFilter] = useState("Loading");
   const [Loading, setLoading] = useState(true);
+  const empData = JSON.parse(localStorage.getItem("employeeData"));
+  const [currLevel, setCurrLevel] = useState(empData.level);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("https://web-production-5485.up.railway.app/compensationform/shrey")
+  // useEffect(()=>{
+  //   console.log(currLevel);
+  // }, [currLevel]);
+
+  useEffect(() => {    
+    fetch(`https://web-production-5485.up.railway.app/compensationform/${empData.roll}/${empData.emp_id}`)
       .then((response) => response.json())
       .then((data) => setForms(data))
       .catch((error) => console.error("Error fetching data:", error));

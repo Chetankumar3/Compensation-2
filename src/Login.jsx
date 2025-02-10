@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Login.css";
 
 function App() {
-  const [guardId, setGuardId] = useState("");
+  const [role, setRole] = useState("");
+  const [empid, setEmpId] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
@@ -12,8 +13,11 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const data = {
-      emp_id: guardId.trim(), // Use emp_id instead of guardId
+    const selectElement = e.target.role;
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+    const send_data = {
+      emp_id: empid.trim(), // Use emp_id instead of empid
       mobile_number: mobileNumber.trim(), // Use mobile_number instead of mobileNumber
     };
 
@@ -25,7 +29,7 @@ function App() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(send_data),
         }
       );
 
@@ -45,6 +49,7 @@ function App() {
               return response.json();
             })
             .then((data) => {
+              data.level = selectedOption.getAttribute("data-level");
               localStorage.setItem("employeeData", JSON.stringify(data));
             })
             .catch((error) => {
@@ -79,14 +84,28 @@ function App() {
         <h1>Account Login</h1>
         <form className="input" onSubmit={handleLogin}>
           <div className="fill">
+
+            <div className="role">
+              <label htmlFor="drop_down">Select you Role:</label>
+              <select id="drop_down" className="dropdown" name="role" required>
+                <option data-level="6" value="" hidden>Select your Role</option>
+                <option data-level="5" value="pccf">P.C.C.F</option>
+                <option data-level="4" value="dfo">D.F.O</option>
+                <option data-level="3" value="sdo">S.D.O</option>
+                <option data-level="2" value="ranger">Ranger</option>
+                <option data-level="1" value="deputyranger">Deputy Ranger</option>
+                <option data-level="0" value="forestguard">Forest Guard</option>
+              </select>
+            </div>
+
             <div className="guard-id">
-              <label htmlFor="guardId">Guard ID:</label>
+              <label htmlFor="empid">Guard ID:</label>
               <input
                 type="text"
-                id="guardId"
-                name="guardId"
-                value={guardId}
-                onChange={(e) => setGuardId(e.target.value)}
+                id="empid"
+                name="empid"
+                value={empid}
+                onChange={(e) => setEmpId(e.target.value)}
                 required
               />
             </div>

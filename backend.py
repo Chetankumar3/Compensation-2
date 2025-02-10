@@ -260,5 +260,121 @@ def get_compensation_forms(forest_guard_id):
             cursor.close()
             connection.close()
 
+@app.route('/compensationform/<string:role>/<string:emp_id>', methods=['GET'])
+def get_compensation_forms_by_role(role, emp_id):
+    """Fetch compensation forms based on the role of the employee."""
+    connection = create_connection()
+    if not connection:
+        return jsonify({"error": "Failed to connect to database"}), 500
+
+    try:
+        cursor = connection.cursor(dictionary=True)
+
+        # Step 1: Get employee details from the 'emp' table
+        emp_query = """
+        SELECT Circle_CG, Circle1, division, subdivision, range_, beat
+        FROM emp 
+        WHERE emp_id = %s
+        """
+        cursor.execute(emp_query, (emp_id,))
+        emp_data = cursor.fetchone()
+
+        if not emp_data:
+            return jsonify({"message": "Employee not found"}), 404
+
+        # Extract values from emp_data
+        circle_cg = emp_data["Circle_CG"]
+        circle1 = emp_data["Circle1"]
+        division = emp_data["division"]
+        subdivision = emp_data["subdivision"]
+        range_ = emp_data["range_"]
+        beat = emp_data["beat"]
+
+        # Step 2: Dynamically build the query based on role
+        query = "SELECT * FROM compensationform WHERE Circle_CG = %s"
+        query_params = [circle_cg]
+
+        if role.lower() == "pccf" or role.lower() == "ccf":
+            pass  # No additional filtering, only Circle_CG is needed
+        elif role.lower() == "dfo":
+            query += " AND division = %s"
+            query_params.append(division)
+        elif role.lower() == "sdo":
+            query += " AND subdivision = %s AND division = %s"
+            query_params.extend([subdivision, division])
+        elif role.lower() == "ranger":
+            query += " AND range_ = %s AND division = %s"
+            query_params.extend([range_, division])
+        elif role.lower() == "deputyranger":
+            query += " AND range_ = %s AND division = %s AND Circle1 = %s"
+            query_params.extend([range_, division, circle1])
+        elif role.lower() == "forestguard":
+            query += " AND range_ = %s AND division = %s AND Circle1 = %s AND beat = %s"
+            query_params.extend([range_, division, circle1, beat])
+        else:
+            return jsonify({"error": "Invalid role"}), 400
+
+        # Step 3: Execute query and fetch compensation forms
+        cursor.execute(query, tuple(query_params))
+        compensation_forms = cursor.fetchall()
+
+        if not compensation_forms:
+            return jsonify({"message": "No matching compensation forms found"}), 404
+
+        # Step 4: Convert result to JSON
+        result = []
+        for form in compensation_forms:
+            form_data = {
+                "formID": form["FormID"],
+                "submissionDateTime": form["SubmissionDateTime"],
+                "forestGuardID": form["ForestGuardID"],
+                "applicantName": form["ApplicantName"],
+                "age": form["Age"],
+                "fatherSpouseName": form["FatherSpouseName"],
+                "mobile": form["Mobile"],
+                "animalName": form["AnimalName"],
+                "incidentDate": form["IncidentDate"],
+                "additionalDetails": form["AdditionalDetails"],
+                "circle_CG": form["Circle_CG"],
+                "circle1": form["Circle1"],
+                "division": form["division"],
+                "range_": form["range_"],
+                "beat": form["beat"],
+                "address": form["Address"],
+                "cropType": form["CropType"],
+                "cerealCrop": form["CerealCrop"],
+                "cropDamageArea": form["CropDamageArea"],
+                "fullHouseDamage": form["FullHouseDamage"],
+                "partialHouseDamage": form["PartialHouseDamage"],
+                "numberOfCattlesDied": form["NumberOfCattlesDied"],
+                "estimatedCattleAge": form["EstimatedCattleAge"],
+                "humanDeathVictimName": form["HumanDeathVictimName"],
+                "numberOfDeaths": form["NumberOfDeaths"],
+                "temporaryInjuryDetails": form["TemporaryInjuryDetails"],
+                "permanentInjuryDetails": form["PermanentInjuryDetails"],
+                "bankName": form["BankName"],
+                "ifscCode": form["IFSCCode"],
+                "branchName": form["BranchName"],
+                "accountHolderName": form["AccountHolderName"],
+                "accountNumber": form["AccountNumber"],
+                "panNumber": form["PANNumber"],
+                "aadhaarNumber": form["AadhaarNumber"],
+                "status": form["Status"],
+                "documentURL": urllib.parse.unquote(form["documentURL"]),
+                "verifiedBy": form["VerifiedBy"],
+                "paymentProcessedBy": form["PaymentProcessedBy"],
+                "comments": form["comments"]
+            }
+            result.append(form_data)
+
+        return jsonify(result), 200
+
+    except mysql.connector.Error as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=5000)
