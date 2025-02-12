@@ -78,7 +78,7 @@ const FormDetails = () => {
         <div className="form-container">
           {Loading ? (
             <div className="loading-container">
-              <img src="/logo.png" alt="Loading Logo" className="loading-logo" />
+              <div className="spinner"></div>
               <p>Loading...</p>
             </div>
           ) : inView.length === 0 ? (

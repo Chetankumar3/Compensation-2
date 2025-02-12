@@ -17,7 +17,6 @@ header h1 {
 .logo {
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .logo strong{
@@ -25,6 +24,7 @@ header h1 {
 }
 
 .logo img {
+  cursor: pointer;
   width: 50px;
   margin-right: 10px;
   background-color: white;

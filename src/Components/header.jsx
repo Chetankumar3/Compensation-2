@@ -7,6 +7,7 @@ const header = ({ LoggedIn }) => {
   const profileRef = useRef(null);
   const [MobNo, setMobNo] = useState("q");
   const [loading, setLoading] = useState(false);
+  const [Title, setTitle] = useState("CHATTISGARH COMPENSATION");
   const [employee, setemployee] = useState({
     emp_id: "--",
     Name: "XYZ",
@@ -28,6 +29,10 @@ const header = ({ LoggedIn }) => {
     }
   }, [LoggedIn]);
 
+  useEffect( ()=>{
+    setTitle('WELCOME, ' + employee.Name);
+  }, [employee.Name]);
+
   const toggleSidebar = () => {
     if (profileRef.current.className === "profile open") profileRef.current.className = "profile";
     else profileRef.current.className = "profile open";
@@ -35,9 +40,9 @@ const header = ({ LoggedIn }) => {
 
   return (
     <header>
-      <div className="logo" onClick={() => { navigate(`/List`); localStorage.clear(); }} >
-        <img src="/logo.png" alt="Logo" />
-        <h1>WELCOME, <strong> {employee.Name} </strong></h1>
+      <div className="logo" >
+        <img src="/logo.png" alt="Logo" onClick={() => { navigate(`/List`); localStorage.clear(); }} />
+        <h1><strong> {Title} </strong></h1>
       </div>
 
       {LoggedIn ? (
