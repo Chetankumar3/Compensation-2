@@ -12,11 +12,7 @@ const FormDetails = () => {
   const [currLevel, setCurrLevel] = useState(empData.level);
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   console.log(currLevel);
-  // }, [currLevel]);
-
-  useEffect(() => {    
+  useEffect(() => {
     fetch(`https://web-production-5485.up.railway.app/compensationform/${empData.roll}/${empData.emp_id}`)
       .then((response) => response.json())
       .then((data) => setForms(data))
@@ -32,27 +28,27 @@ const FormDetails = () => {
   };
 
   const handlePendingClick = () => {
-    setInView( forms.filter((form) => (form.status > currLevel) && form.status != 4) );
+    setInView(forms.filter((form) => (form.status > currLevel) && form.status != 4));
     setCurrentFilter("Pending");
   };
 
   const handlePendingForYouClick = () => {
-    setInView( forms.filter((form) => form.status == currLevel) );
+    setInView(forms.filter((form) => form.status == currLevel));
     setCurrentFilter("Pending (For You)");
   };
 
   const handleAcceptedClick = () => {
-    setInView( forms.filter((form) => form.status == 4) );
+    setInView(forms.filter((form) => form.status == 4));
     setCurrentFilter("Accepted");
   };
 
   const handleRejectedClick = () => {
-    setInView( forms.filter((form) => form.status == -1) );
+    setInView(forms.filter((form) => form.status == -1));
     setCurrentFilter("Rejected");
   };
 
   useEffect(() => {
-    setTimeout(()=>{
+    setTimeout(() => {
       if(Loading) setLoading(false);
     }, 1200);
   }, [inView]);
@@ -81,7 +77,10 @@ const FormDetails = () => {
         <h2 className="title">{currentFilter} Forms</h2>
         <div className="form-container">
           {Loading ? (
-            <div> <p>Loading...</p> </div>
+            <div className="loading-container">
+              <img src="/logo.png" alt="Loading Logo" className="loading-logo" />
+              <p>Loading...</p>
+            </div>
           ) : inView.length === 0 ? (
             <div> <p>No forms.</p> </div>
           ) : (

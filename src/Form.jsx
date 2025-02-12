@@ -8,11 +8,14 @@ const ApplicationVerification = () => {
   const [Comments, setComments] = useState("None");
   const [isOpen, setIsOpen] = useState(false);
   const [Decision, setDecision] = useState("");
+  const [aprrove_type, setAprrove_type] = useState("Forward");
   const empData = JSON.parse(localStorage.getItem("employeeData"));
   const params = useParams();
 
   useEffect(() => {
     if (params.formID !== FormID) setFormID(params.formID);
+    console.log(empData);
+    if (empData.roll === "dfo") setAprrove_type("Accept");
   }, [params.formID]);
 
   useEffect(() => {
@@ -42,25 +45,27 @@ const ApplicationVerification = () => {
   };
 
   const handleClosePopup = () => {
-    // console.log("Close Pop up called");
     if (isOpen) setIsOpen(false);
   };
   const handlePopup = (temp) => {
-    // console.log(temp);
     if (!isOpen) setIsOpen(true);
     if (Decision !== temp) setDecision(temp);
   };
 
   const handleConfirm = () => {
-    // console.log("Decision: ");
-    // console.log(Decision);
-    // console.log("Done...");
     handlingButtons(Decision);
     if (isOpen) setIsOpen(false);
   };
 
   if (!data) {
-    return <div className="container4 Loading">Loading...</div>;
+    return (
+      <div className="container4 Loading">
+        <div className="loading-container">
+          <img src="/logo.png" alt="Loading Logo" className="loading-logo" />
+        </div>
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -72,33 +77,54 @@ const ApplicationVerification = () => {
           <div className="section">
             <h2>Applicant Details</h2>
             <div className="grid">
+              <div className="field">Name: {data.applicantName}</div>
               <div className="field">Aadhaar Number: {data.aadhaarNumber}</div>
-              <div className="field">Applicant Name: {data.applicantName}</div>
               <div className="field">Father/Spouse Name: {data.fatherSpouseName}</div>
               <div className="field">Address: {data.address}</div>
               <div className="field">Age: {data.age}</div>
+              <div className="field">Additional Details: {data.additionalDetails || "N/A"}</div>
               <div className="field">Mobile: {data.mobile}</div>
+              <div className="field">PAN Number: {data.panNumber}</div>
+              <a href={data.documentURL} target="_blank" rel="noopener noreferrer">View/Download Document</a>
             </div>
           </div>
 
           <div className="section">
+            <h2>Location Details</h2>
+            <div className="grid">
+              <div className="field">Circle CG: {data.circle_CG}</div>
+              <div className="field">Division: {data.division}</div>
+              <div className="field">Subdivision: {data.subdivision}</div>
+              <div className="field">Circle1: {data.circle1}</div>
+              <div className="field">Range: {data.range_}</div>
+              <div className="field">Beat: {data.beat}</div>
+            </div>
+
             <h2>Incident Details</h2>
             <div className="grid">
-              <div className="field">Incident Date: {data.incidentDate}</div>
               <div className="field">Animal Name: {data.animalName}</div>
-              <div className="field">Number of Deaths: {data.numberOfDeaths}</div>
-              <div className="field">Permanent Injury Details: {data.permanentInjuryDetails || "N/A"}</div>
-              <div className="field">Temporary Injury Details: {data.temporaryInjuryDetails || "N/A"}</div>
+              <div className="field">Incident Date: {data.incidentDate}</div>
+            </div>
+          </div>
+
+          <div className="section">
+            <h2>Form Details</h2>
+            <div className="grid">
+              <div className="field">Form ID: {data.formID}</div>
+              <div className="field">Filled By: {data.forestGuardID}</div>
+              <div className="field">Current Status: {data.status}</div>
+              <div className="field">Submission Date & Time: {data.submissionDateTime}</div>
+              <div className="field">Total Compensation Amount: {data.totalCompensationAmount}</div>
             </div>
           </div>
 
           <div className="section">
             <h2>Damage Details</h2>
             <div className="grid">
+              <div className="field">Crop Damage Area: {data.cropDamageArea}</div>
               <div className="field">Crop Type: {data.cropType || "N/A"}</div>
-              <div className="field">Cereal Crop: {data.cerealCrop || "N/A"}</div>
-              <div className="field">Crop Damage Area: {data.cropDamageArea || 0}</div>
-              <div className="field">Number of Cattles Died: {data.numberOfCattlesDied || 0}</div>
+              <div className="field">Cattle Injury Amount: {data.catleInjuryAmount || "N/A"}</div>
+              <div className="field">Number of Cattles Died: {data.numberOfCattlesDied}</div>
               <div className="field">Full House Damage: {data.fullHouseDamage || "N/A"}</div>
               <div className="field">Partial House Damage: {data.partialHouseDamage || "N/A"}</div>
             </div>
@@ -112,41 +138,48 @@ const ApplicationVerification = () => {
               <div className="field">Bank Name: {data.bankName}</div>
               <div className="field">Branch Name: {data.branchName}</div>
               <div className="field">IFSC Code: {data.ifscCode}</div>
-              <div className="field">PAN Number: {data.panNumber}</div>
             </div>
           </div>
 
           <div className="section">
-            <h2>Verification & Status</h2>
-            <div className="grid">
-              <div className="field">Form ID: {data.formID}</div>
-              <div className="field">Submission Date: {data.submissionDateTime}</div>
-              <div className="field">Verified By: {data.verifiedBy}</div>
-              <div className="field">Payment Processed By: {data.paymentProcessedBy}</div>
-              <div className="field">Status: {data.status || "Pending"}</div>
-              <div className="field">Message for not approval: <strong className="comments">{data.comments || "Pending"}</strong></div>
-            </div>
-            <a href={data.documentURL} target="_blank" rel="noopener noreferrer">
-              View/Download Document
-            </a>
-          </div>
-
-          <div className="section">
-            <h2>Comments</h2>
-            <textarea value={Comments} onChange={(e) => { setComments(e.target.value) }} placeholder="Add your comments here..." className="textarea"></textarea>
-
+            <h2>Approval</h2>
+            <textarea value={Comments} onChange={(e) => setComments(e.target.value)} placeholder="Add your comments here..." className="textarea"></textarea>
             <div className="buttons">
-              <button className="btn reject" onClick={() => { handlePopup("reject") }}>Reject</button>
-              <button className="btn approve" onClick={() => { handlePopup("accept") }}>Approve</button>
-              <button className="btn send-back" onClick={() => { handlePopup("send_back") }}>Send Back</button>
+              <button className="btn reject" onClick={() => handlePopup("reject")}>Reject</button>
+              <button className="btn approve" onClick={() => handlePopup("accept")}>{aprrove_type}</button>
+              <button className="btn send-back" onClick={() => handlePopup("send_back")}>Send Back</button>
+            </div>
+          </div>
+
+          <div className="section table">
+            <h2>Status History</h2>
+
+            <div className="table-container">
+              <table className="status-table">
+                <thead>
+                  <tr>
+                    <th>Comment</th>
+                    <th>Status</th>
+                    <th>Timestamp</th>
+                    <th>Updated By (ID)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.statusHistory.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.comment || "No Comment"}</td>
+                      <td>{entry.status}</td>
+                      <td>{new Date(entry.timestamp).toLocaleString()}</td>
+                      <td>{entry.updatedBy}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
 
-        {/* <div className="right"> */}
-        {/* <iframe className="right" src={`https://drive.google.com/file/d/1SjBtVtx0tFqnCWeMt4GU9lES0WywMK58/preview`} frameborder="0"></iframe> */}
         <iframe className="right" src={`${data.documentURL}#navbar=0`}></iframe>
-        {/* </div> */}
       </div>
 
       {isOpen && (

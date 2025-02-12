@@ -9,7 +9,7 @@ const header = ({ LoggedIn }) => {
   const [loading, setLoading] = useState(false);
   const [employee, setemployee] = useState({
     emp_id: "--",
-    Name: "---",
+    Name: "XYZ",
     mobile_number: "--",
     Circle_CG: "--",
     Circle1: "--",
@@ -33,12 +33,11 @@ const header = ({ LoggedIn }) => {
     else profileRef.current.className = "profile open";
   }
 
-  // return null;
   return (
     <header>
       <div className="logo" onClick={() => { navigate(`/List`); localStorage.clear(); }} >
         <img src="/logo.png" alt="Logo" />
-        <h1>CHHATISGARH COMPENSATION</h1>
+        <h1>WELCOME, <strong> {employee.Name} </strong></h1>
       </div>
 
       {LoggedIn ? (

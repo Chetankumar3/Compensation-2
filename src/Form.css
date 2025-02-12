@@ -1,6 +1,6 @@
 .container4{
   font-family: Arial, sans-serif;
-  width: 98.7vw;
+  width: 98.85vw;
   min-height: 100vh;
   margin: auto;
   padding: 20px;
@@ -8,7 +8,7 @@
   color: black;
 }
 
-.Loading{
+.container4 .Loading{
   text-align: center;
 }
 
@@ -19,17 +19,16 @@
 }
 
 .container4 .section {
-  /* background-color: rgb(244, 244, 244); */
   border: 1px solid rgb(217, 217, 217);
   box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 12px 16px;
-  /* height: 275px; */
 }
 
 .container4 .section h2 {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 8px;
   color: #333;
 }
 
@@ -42,7 +41,7 @@
 .container4 .left {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, max-content);
+  /* grid-template-rows: repeat(4, fit-content); */
   gap: 12px;
 }
 
@@ -55,7 +54,8 @@
 .container4 .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 9px;
+  gap: 4px;
+  margin-bottom: 18px;
 }
 
 .container4 .textarea {
@@ -99,8 +99,7 @@
   background-color: #2249bd;
 }
 
-/* Pop-up */
-.popup {
+.container4 .popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -113,7 +112,7 @@
   z-index: 10;
 }
 
-.popup-content {
+.container4 .popup-content {
   background-color: white;
   padding: 20px;
   border-radius: 6px;
@@ -122,11 +121,11 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.popup-actions {
+.container4 .popup-actions {
   margin-top: 20px;
 }
 
-.btn {
+.container4 .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -135,17 +134,52 @@
   margin: 5px;
 }
 
-.cancel-btn {
+.container4 .cancel-btn {
   background-color: #f44336; /* Red for cancel */
   color: white;
 }
 
-.confirm-btn {
+.container4 .confirm-btn {
   background-color: #4caf50; /* Green for confirm */
   color: white;
 }
 
 /* Optional: Add hover effect */
-.btn:hover {
+.container4 .btn:hover {
   opacity: 0.8;
+}
+
+.container4 .table{
+  grid-column: span 2;
+}
+
+.container4 .table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.container4 .status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.container4 .status-table th,
+.container4 .status-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.container4 .status-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.container4 .status-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.container4 .status-table tr:hover {
+  background-color: #f1f1f1;
 }
