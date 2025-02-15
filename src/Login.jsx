@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Login.css";
 
 function App() {
-  const [role, setRole] = useState("");
   const [empid, setEmpId] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,8 +16,8 @@ function App() {
     const selectedOption = selectElement.options[selectElement.selectedIndex];
 
     const send_data = {
-      emp_id: empid.trim(), // Use emp_id instead of empid
-      mobile_number: mobileNumber.trim(), // Use mobile_number instead of mobileNumber
+      emp_id: empid.trim(),
+      mobile_number: mobileNumber.trim(),
     };
 
     try {
@@ -73,6 +72,24 @@ function App() {
   const handleSendOtp = () => {
     setMessage("OTP sent to the provided mobile number.");
   };
+
+  const [showFirst, setShowFirst] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowFirst(false);
+    }, 1000);
+  }, []);
+
+  if(showFirst){
+    return(
+      <div className="container">
+        <div className="loader-container">
+          <div className="loading-logo"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
