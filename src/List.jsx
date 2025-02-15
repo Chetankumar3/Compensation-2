@@ -4,22 +4,36 @@ import { useNavigate } from "react-router-dom";
 import './List.css';
 
 const FormDetails = () => {
-  const [forms, setForms] = useState([]);
+  const [forms, setForms] = useState();
   const [inView, setInView] = useState([]);
   const [currentFilter, setCurrentFilter] = useState("Loading");
   const [Loading, setLoading] = useState(true);
-  const empData = JSON.parse(localStorage.getItem("employeeData"));
-  const [currLevel, setCurrLevel] = useState(empData.level);
+  const [empData, setempData] = useState();
+  const [currLevel, setCurrLevel] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("employeeData"));
+
+    if (storedData !== null) {
+      setempData(storedData);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!empData) return;
+
+    setCurrLevel(empData.level);
     fetch(`https://web-production-5485.up.railway.app/compensationform/${empData.roll}/${empData.emp_id}`)
       .then((response) => response.json())
       .then((data) => setForms(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  }, [empData]);
 
   useEffect(() => {
+    if(!forms) return;
+
+    if(Loading) setLoading(false);
     handlePendingForYouClick();
   }, [forms]);
 
@@ -46,12 +60,6 @@ const FormDetails = () => {
     setInView(forms.filter((form) => form.status == -1));
     setCurrentFilter("Rejected");
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      if(Loading) setLoading(false);
-    }, 1200);
-  }, [inView]);
 
   return (
     <div className="container3">

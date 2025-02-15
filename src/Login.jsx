@@ -40,7 +40,6 @@ function App() {
           setColor("#228B22");
           setMessage("Login successful!");
 
-          // useEffect(() => {
           fetch(`https://web-production-5485.up.railway.app/guards/${mobileNumber}`) // Replace with actual API URL
             .then((response) => {
               if (!response.ok) {
@@ -55,11 +54,10 @@ function App() {
             .catch((error) => {
               setError(error.message);
             });
-          // }, []); // Empty dependency array to run only once when component mounts
 
           setTimeout(() => {
             navigate("/List");
-          }, 1000); // Replace '/dashboard' with your desired path
+          }, 1000);
         } else {
           setMessage("Login failed. Invalid Guard ID or Mobile Number.");
         }
@@ -73,7 +71,6 @@ function App() {
   };
 
   const handleSendOtp = () => {
-    // Functionality to send OTP can be added here
     setMessage("OTP sent to the provided mobile number.");
   };
 
@@ -99,7 +96,7 @@ function App() {
             </div>
 
             <div className="guard-id">
-              <label htmlFor="empid">Guard ID:</label>
+              <label htmlFor="empid">Employee ID:</label>
               <input
                 type="text"
                 id="empid"

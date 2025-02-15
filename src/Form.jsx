@@ -9,6 +9,14 @@ const ApplicationVerification = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [Decision, setDecision] = useState("");
   const [aprrove_type, setAprrove_type] = useState("Forward");
+  const mapping = {
+    0: 'Forest Guard',
+    1: 'Deputy Ranger',
+    2: 'Ranger',
+    3: 'S.D.O',
+    4: 'D.F.O',
+    5: 'P.C.C.F',
+  };
   const empData = JSON.parse(localStorage.getItem("employeeData"));
   const params = useParams();
 
@@ -26,9 +34,10 @@ const ApplicationVerification = () => {
         setData(matchedData);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, [params.formID]);
+  }, [params.formID, empData]);
 
   const handlingButtons = (action) => {
+    setData(null);
     fetch(`https://web-production-5485.up.railway.app/update_form_status/${FormID}`, {
       method: "POST",
       headers: {
@@ -38,10 +47,19 @@ const ApplicationVerification = () => {
         emp_id: FormID,
         action: action,
         comments: Comments,
+        verified_by: empData.emp_id,
       }),
     })
-      .then(response => response.json())
-      .catch((error) => console.error("Error updating Status:", error));
+      .then((response) => response.json())
+      .then(() => {
+        return fetch(`https://web-production-5485.up.railway.app/compensationform/${empData.roll}/${empData.emp_id}`);
+      })
+      .then((response) => response.json())
+      .then((array) => {
+        const matchedData = array.find((item) => item.formID === parseInt(params.formID, 10));
+        setData(matchedData);
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   const handleClosePopup = () => {
@@ -59,11 +77,11 @@ const ApplicationVerification = () => {
 
   if (!data) {
     return (
-      <div className="container4 Loading">
+      <div className="container4">
         <div className="loading-container">
-          <img src="/logo.png" alt="Loading Logo" className="loading-logo" />
+          <div className="spinner"></div>
+          <p>Loading...</p>
         </div>
-        Loading...
       </div>
     );
   }
@@ -112,7 +130,7 @@ const ApplicationVerification = () => {
             <div className="grid">
               <div className="field">Form ID: {data.formID}</div>
               <div className="field">Filled By: {data.forestGuardID}</div>
-              <div className="field">Current Status: {data.status}</div>
+              <div className="field">Current Status: {mapping[data.status]}</div>
               <div className="field">Submission Date & Time: {data.submissionDateTime}</div>
               <div className="field">Total Compensation Amount: {data.totalCompensationAmount}</div>
             </div>
