@@ -9,6 +9,8 @@ const ApplicationVerification = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [Decision, setDecision] = useState("");
   const [aprrove_type, setAprrove_type] = useState("Forward");
+  const [isDisabled, setisDisabled] = useState(true);
+  const [request_data, setRequest_data] = useState(0);
   const mapping = {
     0: 'Forest Guard',
     1: 'Deputy Ranger',
@@ -22,7 +24,6 @@ const ApplicationVerification = () => {
 
   useEffect(() => {
     if (params.formID !== FormID) setFormID(params.formID);
-    console.log(empData);
     if (empData.roll === "dfo") setAprrove_type("Accept");
   }, [params.formID]);
 
@@ -34,7 +35,11 @@ const ApplicationVerification = () => {
         setData(matchedData);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, [params.formID, empData]);
+  }, [empData, request_data]);
+
+  useEffect(()=>{
+    if(data && data.status === empData.level && data.status <= 4 && isDisabled) setisDisabled(false);
+  }, [data]);
 
   const handlingButtons = (action) => {
     setData(null);
@@ -48,11 +53,14 @@ const ApplicationVerification = () => {
         action: action,
         comments: Comments,
         verified_by: empData.emp_id,
+        level: empData.level,
       }),
     })
       .then((response) => response.json())
       .then(() => {
-        return fetch(`https://web-production-5485.up.railway.app/compensationform/${empData.roll}/${empData.emp_id}`);
+        setTimeout(() => {
+          setRequest_data(1 - request_data);          
+        }, 1000);
       })
       .then((response) => response.json())
       .then((array) => {
@@ -65,8 +73,9 @@ const ApplicationVerification = () => {
   const handleClosePopup = () => {
     if (isOpen) setIsOpen(false);
   };
+
   const handlePopup = (temp) => {
-    if (!isOpen) setIsOpen(true);
+    if (!isOpen && !isDisabled) setIsOpen(true);
     if (Decision !== temp) setDecision(temp);
   };
 
@@ -163,9 +172,24 @@ const ApplicationVerification = () => {
             <h2>Approval</h2>
             <textarea value={Comments} onChange={(e) => setComments(e.target.value)} placeholder="Add your comments here..." className="textarea"></textarea>
             <div className="buttons">
-              <button className="btn reject" onClick={() => handlePopup("reject")}>Reject</button>
-              <button className="btn approve" onClick={() => handlePopup("accept")}>{aprrove_type}</button>
-              <button className="btn send-back" onClick={() => handlePopup("send_back")}>Send Back</button>
+              <button
+                title={`${isDisabled ? "Button disabled" : ""}`}
+                className={`${isDisabled ? "disabled reject" : "btn reject"}`}
+                onClick={() => handlePopup("reject")}>
+                Reject
+              </button>
+              <button
+                title={`${isDisabled ? "Button disabled" : ""}`}
+                className={`${isDisabled ? "disabled approve" : "btn approve"}`}
+                onClick={() => handlePopup("accept")}>
+                {aprrove_type}
+              </button>
+              <button
+                title={`${isDisabled ? "Button disabled" : ""}`}
+                className={`${isDisabled ? "disabled send-back" : "btn send-back"}`}
+                onClick={() => handlePopup("send_back")}>
+                Send Back
+              </button>
             </div>
           </div>
 

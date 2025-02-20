@@ -101,7 +101,7 @@
   margin-top: 20px;
 }
 
-.container4 .btn {
+.container4 .btn, .container4 .disabled{
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -110,16 +110,32 @@
   color: #fff;
 }
 
-.container4 .btn.reject {
+.container4 .disabled{
+  cursor: not-allowed;
+}
+
+.container4 .reject {
   background-color: #f62839;
 }
 
-.container4 .btn.approve {
+.container4 .approve {
   background-color: #25a630;
 }
 
-.container4 .btn.send-back {
+.container4 .send-back {
   background-color: #2249bd;
+}
+
+.container4 .disabled.reject {
+  background-color: #fb747f;
+}
+
+.container4 .disabled.approve {
+  background-color: #53a95a;
+}
+
+.container4 .disabled.send-back {
+  background-color: #5b74bf;
 }
 
 .container4 .popup {
@@ -158,16 +174,15 @@
 }
 
 .container4 .cancel-btn {
-  background-color: #f44336; /* Red for cancel */
+  background-color: #f44336;
   color: white;
 }
 
 .container4 .confirm-btn {
-  background-color: #4caf50; /* Green for confirm */
+  background-color: #4caf50;
   color: white;
 }
 
-/* Optional: Add hover effect */
 .container4 .btn:hover {
   opacity: 0.8;
 }
