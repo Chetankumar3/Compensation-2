@@ -38,7 +38,7 @@ const FormDetails = () => {
   }, [forms]);
 
   const handleViewFullApplication = (formID) => {
-    navigate(`/Form/${formID}`);
+    navigate(`/Administration/Form/${formID}`);
   };
 
   const handlePendingClick = () => {

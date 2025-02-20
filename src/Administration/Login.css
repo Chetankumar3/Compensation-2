@@ -44,8 +44,8 @@
 }
 
 .container .logo {
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   margin-bottom: 20px;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .container .button{
-  background-color: #337ab7;
+  background-color: #1f1282;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -105,11 +105,15 @@
 }
 
 .container .button:hover{
-  background-color: #286090;
+  background-color: #2918ac;
+}
+
+.container .lower{
+  display: flex;
+  justify-content: space-between;
 }
 
 .container .resend{
   color: #286090;
   text-decoration: none;
-  margin: 0 auto;
 }

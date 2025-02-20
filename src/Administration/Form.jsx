@@ -49,10 +49,9 @@ const ApplicationVerification = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        emp_id: FormID,
+        emp_id: empData.emp_id,
         action: action,
         comments: Comments,
-        verified_by: empData.emp_id,
         level: empData.level,
       }),
     })

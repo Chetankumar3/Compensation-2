@@ -55,7 +55,7 @@ function App() {
             });
 
           setTimeout(() => {
-            navigate("/List");
+            navigate("/Administration/List");
           }, 1000);
         } else {
           setMessage("Login failed. Invalid Guard ID or Mobile Number.");
@@ -81,8 +81,8 @@ function App() {
     }, 1000);
   }, []);
 
-  if(showFirst){
-    return(
+  if (showFirst) {
+    return (
       <div className="container">
         <div className="loader-container">
           <div className="loading-logo"></div>
@@ -141,11 +141,19 @@ function App() {
           <button type="button" className="button" onClick={handleSendOtp}>
             Send OTP
           </button>
-          <p className="resend">
-            <a href="#" onClick={handleSendOtp}>
-              Resend OTP
-            </a>
-          </p>
+
+          <div className="lower">
+            <p className="resend">
+              <a href="#" onClick={() => navigate(`/User/Login`)}>
+                User Login
+              </a>
+            </p>
+            <p className="resend">
+              <a href="#" onClick={handleSendOtp}>
+                Resend OTP
+              </a>
+            </p>
+          </div>
         </form>
         {message && <p className="message" style={{ color }}>{message}</p>}
       </div>

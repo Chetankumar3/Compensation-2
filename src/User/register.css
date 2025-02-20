@@ -1,0 +1,98 @@
+.register-container {
+    width: 98.85vw;
+    height: 100vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    caret-color: #000;
+    padding-top: 50px;
+    background-color: rgb(239, 239, 239);
+}
+
+.register-container * {
+    color: #000;
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.register-container .inner {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 9fr 10fr;
+    gap: 15px;
+}
+
+.register-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    font-weight: 550;
+    margin-bottom: 5px;
+}
+
+.register-form input,
+.register-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.dropdowns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.dropdown-field {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.register-btn {
+    background-color: #1f1282;
+    color: white;
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    grid-column: span 2;
+}
+
+.register-btn:hover {
+    background-color: #2918ac;
+}
+
+.login-links {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.login-links a {
+    text-decoration: none;
+    color: #0057ff;
+    font-size: 14px;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
