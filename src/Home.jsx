@@ -1,24 +1,66 @@
-import { useLocation } from "react-router-dom";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
 
-import Header from "./Administration/Components/header.jsx";
-import Login from "./Administration/Login.jsx";
-import List from "./Administration/List.jsx";
-import Form from "./Administration/Form.jsx";
-import User_Registration from "./User/Register.jsx";
-import User_Login from "./User/User_Login.jsx";
+import Header from "./header.jsx";
+import OfficialLogin from "./Official/Login.jsx";
+import OfficialHome from "./Official/Home.jsx";
+import OfficialForm from "./Official/Form.jsx";
+import UserRegistration from "./User/Register.jsx";
+import UserLogin from "./User/Login.jsx";
+import UserHome from "./User/Home.jsx";
 
 function HeaderWithReload() {
   const location = useLocation();
   return <Header key={location.pathname} />;
 }
 
+// --- Layout Components ---
+// UserLayout wraps all /User routes
+function UserLayout() {
+  return (
+    <>
+      <HeaderWithReload/>
+      <Outlet />
+    </>
+  );
+}
+
+// OfficialLayout wraps all /Official routes
+function OfficialLayout() {
+  return (
+    <>
+      <HeaderWithReload />
+      <Outlet />
+    </>
+  );
+}
+
+// --- Router Setup ---
 const router = createBrowserRouter([
-  { path: "/", element: <><HeaderWithReload /><User_Registration /></> },
-  { path: "/User/Login", element: <><HeaderWithReload /><User_Login /></> },
-  { path: "/Administration/Login", element: <><HeaderWithReload /><Login /></> },
-  { path: "/Administration/List", element: <><HeaderWithReload /><List /></> },
-  { path: "/Administration/Form/:formID", element: <><HeaderWithReload /><Form /></> },
+  {
+    path: "/User",
+    element: <UserLayout />,
+    children: [
+      { path: "Register", element: <UserRegistration /> },
+      { path: "Login", element: <UserLogin /> },
+      { path: "Home", element: <UserHome /> },
+    ],
+  },
+  {
+    path: "/Official",
+    element: <OfficialLayout />,
+    children: [
+      { path: "Login", element: <OfficialLogin /> },
+      { path: "Home", element: <OfficialHome /> },
+      { path: "Form/:formID", element: <OfficialForm /> },
+    ],
+  },
+  { path: "/", element: <><HeaderWithReload/><UserLogin/></> },
 ]);
 
 function App() {

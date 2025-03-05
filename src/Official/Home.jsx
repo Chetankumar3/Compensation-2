@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import './List.css';
+import './Home.css';
 
 const FormDetails = () => {
   const [forms, setForms] = useState();
@@ -38,7 +38,7 @@ const FormDetails = () => {
   }, [forms]);
 
   const handleViewFullApplication = (formID) => {
-    navigate(`/Administration/Form/${formID}`);
+    navigate(`/Official/Form/${formID}`);
   };
 
   const handlePendingClick = () => {

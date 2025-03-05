@@ -37,8 +37,8 @@ const ApplicationVerification = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [empData, request_data]);
 
-  useEffect(()=>{
-    if(data && data.status === empData.level && data.status <= 4 && isDisabled) setisDisabled(false);
+  useEffect(() => {
+    if (data && data.status === empData.level && data.status <= 4 && isDisabled) setisDisabled(false);
   }, [data]);
 
   const handlingButtons = (action) => {
@@ -58,7 +58,7 @@ const ApplicationVerification = () => {
       .then((response) => response.json())
       .then(() => {
         setTimeout(() => {
-          setRequest_data(1 - request_data);          
+          setRequest_data(1 - request_data);
         }, 1000);
       })
       .then((response) => response.json())
@@ -206,7 +206,7 @@ const ApplicationVerification = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.statusHistory.map((entry, index) => (
+                  {data.statusHistory.slice().reverse().map((entry, index) => (
                     <tr key={index}>
                       <td>{entry.comment || "No Comment"}</td>
                       <td>{entry.status}</td>
@@ -214,6 +214,7 @@ const ApplicationVerification = () => {
                       <td>{entry.updatedBy}</td>
                     </tr>
                   ))}
+
                 </tbody>
               </table>
             </div>

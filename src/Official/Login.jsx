@@ -8,6 +8,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
   const navigate = useNavigate();
+  const [showFirst, setShowFirst] = useState(true);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ function App() {
             });
 
           setTimeout(() => {
-            navigate("/Administration/List");
+            navigate("/Official/Home");
           }, 1000);
         } else {
           setMessage("Login failed. Invalid Guard ID or Mobile Number.");
@@ -73,12 +74,16 @@ function App() {
     setMessage("OTP sent to the provided mobile number.");
   };
 
-  const [showFirst, setShowFirst] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setShowFirst(false);
-    }, 1000);
+    }, 500);
+
+    const user = localStorage.getItem('employeeData');
+    if(user){
+      navigate("/Official/List");
+    }
   }, []);
 
   if (showFirst) {

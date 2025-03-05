@@ -57,6 +57,7 @@ header .profile {
   background-color: rgba(160, 157, 255, 0.7);
   color: #000;
   transition: right 0.3s ease-in-out;
+  border-radius: 12px 0px 0px 12px;
 }
 
 header .profile.open {
@@ -101,7 +102,8 @@ header .profile .employee-card {
   height: 100%;
   background: rgba(255, 255, 255, 0.27);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(5px);
+  border-radius: 12px 0px 0px 12px;
 }
 
 header .profile .info {
