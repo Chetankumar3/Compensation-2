@@ -21,6 +21,8 @@ const RegisterForm = () => {
   const [range, setRange] = useState("");
   const [beat, setBeat] = useState("");
 
+  ompendation
+  
   useEffect(() => {
     setTimeout(() => {
       if (showFirst) setShowFirst(false);
