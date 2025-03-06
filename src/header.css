@@ -5,7 +5,7 @@ header {
   background-color: #0f0842;
   padding: 5px;
   border-bottom: 1px solid #ddd;
-  width: 98.85vw;
+  width: 100vw;
 }
 
 header h1 {
@@ -41,11 +41,13 @@ header #profile {
 
 header .right {
   margin-right: 12px;
+  display: flex;
+  align-items: center;
 }
 
 header #profile svg {
   fill: white;
-  height: 28px;
+  height: 36px;
 }
 
 header .profile {
@@ -140,4 +142,24 @@ header .profile .logout {
 
 header .profile .logout:hover {
   background-color: #2918ac;
+}
+
+header .NewForm {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  margin-right: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+header .NewForm:hover {
+  background-color: #0056b3;
+}
+
+header .NewForm:active {
+  transform: scale(0.98);
 }

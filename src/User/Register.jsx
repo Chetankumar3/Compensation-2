@@ -8,6 +8,8 @@ import { getAnalytics } from "firebase/analytics";
 
 const RegisterForm = () => {
   const [showFirst, setShowFirst] = useState(true);
+  const [RegisterSuccessful, setRegisterSuccessful] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   // State variables for form fields
@@ -33,31 +35,36 @@ const RegisterForm = () => {
   }, [navigate, showFirst]);
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBQOW9h79nT9AtL376WYdl3V5WCOrAyfNo",
-    authDomain: "compensation-20bcd.firebaseapp.com",
-    projectId: "compensation-20bcd",
-    storageBucket: "compensation-20bcd.firebasestorage.app",
-    messagingSenderId: "512952393727",
-    appId: "1:512952393727:web:28ec53152fbad15e38d1ca",
-    measurementId: "G-2056CNQLGG"
+    apiKey: "AIzaSyCZe9gNm1yMdEvz1404e88MdzzhHmHMTyc",
+    authDomain: "compensation-app-4b6fa.firebaseapp.com",
+    projectId: "compensation-app-4b6fa",
+    storageBucket: "compensation-app-4b6fa.firebasestorage.app",
+    messagingSenderId: "565021771486",
+    appId: "1:565021771486:web:380ebb8fb6325d3d4ae44f",
+    measurementId: "G-NX2LX8M5DV"
   };
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth();
   const CreateAccount = () => {
+    setErrorMessage("");
+
     createUserWithEmailAndPassword(auth, userID + '@gmail.com', password)
       .then((userCredential) => {
-        console.log("Account created successfully");
+        setRegisterSuccessful(true);
 
-        navigate('User/Login');
+        setTimeout(() => {
+          navigate('../Login');          
+        }, 200);
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error("Error during registration:", errorCode, errorMessage);
-        // Optionally display the error to the user
+
+        if(errorMessage === 'Firebase: Error (auth/email-already-in-use).') setErrorMessage('Firebase: Error (auth/username-already-in-use).');
+        else setErrorMessage(`${errorMessage}`);
+        console.error("Error signing in:", errorCode, errorMessage);
       });
   };
 
@@ -179,6 +186,13 @@ const RegisterForm = () => {
             Official Login
           </a>
         </div>
+
+        {RegisterSuccessful &&
+          <div className="msg">Account Registered Successfully</div>
+        }
+        {ErrorMessage &&
+          <div className="error">{ErrorMessage}</div>
+        }
       </div>
     </div>
   );

@@ -28,24 +28,24 @@
     max-width: 700px;
 }
 
-.register-form {
+.register-container .register-form {
     display: grid;
     grid-template-columns: 9fr 10fr;
     gap: 15px;
 }
 
-.register-field {
+.register-container .register-field {
     display: flex;
     flex-direction: column;
 }
 
-.register-form label {
+.register-container .register-form label {
     font-weight: 550;
     margin-bottom: 5px;
 }
 
 .register-form input,
-.register-form select {
+.register-container .register-form select {
     width: 100%;
     padding: 8px;
     border: 1px solid #000;
@@ -54,19 +54,19 @@
     background-color: white;
 }
 
-.dropdowns {
+.register-container .dropdowns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
-.dropdown-field {
+.register-container .dropdown-field {
     display: flex;
     flex-direction: column;
     font-size: 12px;
 }
 
-.register-btn {
+.register-container .register-btn {
     background-color: #1f1282;
     color: white;
     font-size: 16px;
@@ -78,23 +78,31 @@
     grid-column: span 2;
 }
 
-.register-btn:hover {
+.register-container .register-btn:hover {
     background-color: #2918ac;
 }
 
-.login-links {
+.register-container .login-links {
     margin-top: 15px;
     text-align: center;
     display: flex;
     justify-content: space-between;
 }
 
-.login-links a {
+.register-container .login-links a {
     text-decoration: none;
     color: #0057ff;
     font-size: 14px;
 }
 
-.login-links a:hover {
+.register-container .login-links a:hover {
     text-decoration: underline;
+}
+
+.register-container .msg{
+    color: green;
+}
+
+.register-container .error{
+    color: red;
 }

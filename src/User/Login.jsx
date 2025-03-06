@@ -11,6 +11,8 @@ const LoginForm = () => {
   const [showFirst, setShowFirst] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [LogInSuccessful, setLogInSuccessful] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,31 +27,34 @@ const LoginForm = () => {
   }, [navigate]);
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBQOW9h79nT9AtL376WYdl3V5WCOrAyfNo",
-    authDomain: "compensation-20bcd.firebaseapp.com",
-    projectId: "compensation-20bcd",
-    storageBucket: "compensation-20bcd.firebasestorage.app",
-    messagingSenderId: "512952393727",
-    appId: "1:512952393727:web:28ec53152fbad15e38d1ca",
-    measurementId: "G-2056CNQLGG"
+    apiKey: "AIzaSyCZe9gNm1yMdEvz1404e88MdzzhHmHMTyc",
+    authDomain: "compensation-app-4b6fa.firebaseapp.com",
+    projectId: "compensation-app-4b6fa",
+    storageBucket: "compensation-app-4b6fa.firebasestorage.app",
+    messagingSenderId: "565021771486",
+    appId: "1:565021771486:web:380ebb8fb6325d3d4ae44f",
+    measurementId: "G-NX2LX8M5DV"
   };
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth();
   const handleLogin = () => {
-    console.log("Called");
+    setErrorMessage("")
     signInWithEmailAndPassword(auth, username + '@gmail.com', password)
       .then((userCredential) => {
-      console.log("Signed in successfully");
+      setLogInSuccessful(true);
 
       const temp = 'Logged In';
       localStorage.setItem('UserData', JSON.stringify(temp) );
-      navigate('../Home');
+       
+      setTimeout( () => (navigate('/User/Home')), 200);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+
+        setErrorMessage(errorMessage);
         console.error("Error signing in:", errorCode, errorMessage);
       });
   };
@@ -104,6 +109,13 @@ const LoginForm = () => {
             Official Login
           </a>
         </div>
+
+        {LogInSuccessful &&
+          <div className="msg">Log In Successfully</div>
+        }
+        {ErrorMessage &&
+          <div className="error">{ErrorMessage}</div>
+        }
       </div>
     </div>
   );
