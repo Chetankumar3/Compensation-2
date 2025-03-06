@@ -6,14 +6,14 @@ function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="UserHome" style={{ textAlign: "center", marginTop: "2rem", color: 'black' }}>
-      <h1 style={{ textAlign: "center", marginTop: "2rem", color: 'black' }}>Welcome</h1>
+    <div className="UserHome">
+      <h1>Welcome</h1>
 
       <div className="forms">
         <div className="form-card">
           <h3>Form Title</h3>
           <p>Form description</p>
-          <button>View Forms</button>
+          <button>View Form</button>
         </div>
       </div>
     </div>

@@ -173,7 +173,7 @@ const RegisterForm = () => {
             </div>
           </div>
 
-          <button type="button" onClick={CreateAccount} className="register-btn">
+          <button type="button" onClick={()=>CreateAccount()} className="register-btn">
             Register
           </button>
         </form>

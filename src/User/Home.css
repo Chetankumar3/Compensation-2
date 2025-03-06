@@ -1,3 +1,20 @@
+.UserHome{
+  background-color: rgb(239, 239, 239);
+  text-Align: "center";
+  color: 'black';
+  padding-top: 1.2rem;
+  min-height: 100vh;
+}
+
+.UserHome *{
+  color: black;
+}
+
+.UserHome h1{
+  text-align: center;
+  color: black;
+}
+
 .UserHome .forms{
     padding: 10px;
 }
@@ -5,10 +22,9 @@
 .UserHome .form-card {
     cursor: pointer;
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid #f3f3f3;
     border-radius: 8px;
     padding: 16px;
-    text-align: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
     width: 250px;
@@ -24,7 +40,7 @@
     color: #555;
   }
   
-  .UserHome .form-card button {
+  .UserHome .form-card button{
     background: #007bff;
     color: white;
     border: none;

@@ -13,10 +13,15 @@ const FormDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("employeeData"));
+    let user = JSON.parse(localStorage.getItem("employeeData"));
 
-    if (storedData !== null) {
-      setempData(storedData);
+    if(!user){
+      user = localStorage.getItem('UserData');
+      if(user){
+        navigate("/User/Home");
+      }else{
+        navigate('/Official/Login');
+      }
     }
   }, []);
 
@@ -67,16 +72,16 @@ const FormDetails = () => {
         <ul>
           <li>
             <button id="pendingForyou" className={currentFilter === "Pending (For You)" ? "activated" : "deactivated"}
-              onClick={handlePendingForYouClick}> Pending (For You) <strong>&#8594;</strong> </button>
+              onClick={()=> handlePendingForYouClick()}> Pending (For You) <strong>&#8594;</strong> </button>
           </li>
           <li>
-            <button id="pending" className={currentFilter === "Pending" ? "activated" : "deactivated"} onClick={handlePendingClick}>Pending <strong>&#8594;</strong></button>
+            <button id="pending" className={currentFilter === "Pending" ? "activated" : "deactivated"} onClick={()=> handlePendingClick()}>Pending <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="accepted" className={currentFilter === "Accepted" ? "activated" : "deactivated"} onClick={handleAcceptedClick}>Accepted <strong>&#8594;</strong></button>
+            <button id="accepted" className={currentFilter === "Accepted" ? "activated" : "deactivated"} onClick={()=> handleAcceptedClick()}>Accepted <strong>&#8594;</strong></button>
           </li>
           <li>
-            <button id="rejected" className={currentFilter === "Rejected" ? "activated" : "deactivated"} onClick={handleRejectedClick}>Rejected <strong>&#8594;</strong></button>
+            <button id="rejected" className={currentFilter === "Rejected" ? "activated" : "deactivated"} onClick={()=> handleRejectedClick()}>Rejected <strong>&#8594;</strong></button>
           </li>
         </ul>
       </div>

@@ -80,9 +80,14 @@ function App() {
       setShowFirst(false);
     }, 500);
 
-    const user = localStorage.getItem('employeeData');
+    let user = localStorage.getItem('employeeData');
     if(user){
-      navigate("/Official/List");
+      navigate("/Official/Home");
+    }else{
+      user = localStorage.getItem('UserData');
+      if(user){
+        navigate("/User/Home");
+      }
     }
   }, []);
 
@@ -143,7 +148,7 @@ function App() {
           <button type="submit" className="button">
             Login
           </button>
-          <button type="button" className="button" onClick={handleSendOtp}>
+          <button type="button" className="button" onClick={()=> handleSendOtp()}>
             Send OTP
           </button>
 
@@ -154,7 +159,7 @@ function App() {
               </a>
             </p>
             <p className="resend">
-              <a href="#" onClick={handleSendOtp}>
+              <a href="#" onClick={()=> handleSendOtp()}>
                 Resend OTP
               </a>
             </p>

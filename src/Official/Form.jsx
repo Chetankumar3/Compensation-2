@@ -22,6 +22,19 @@ const ApplicationVerification = () => {
   const empData = JSON.parse(localStorage.getItem("employeeData"));
   const params = useParams();
 
+  useEffect(()=>{
+    let user = localStorage.getItem('employeeData');
+
+    if(!user){
+      user = localStorage.getItem('UserData');
+      if(user){
+        navigate("/User/Home");
+      }else{
+        navigate('/Official/Login');
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (params.formID !== FormID) setFormID(params.formID);
     if (empData.roll === "dfo") setAprrove_type("Accept");

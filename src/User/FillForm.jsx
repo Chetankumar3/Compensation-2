@@ -1,12 +1,28 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./FillForm.css";
+import { use } from "react";
 
 export default function DamageReport() {
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm();
+  const navigate = useNavigate();
 
   // Watch all form fields
   const formValues = watch();
+
+  useEffect(()=>{
+    let user = localStorage.getItem('employeeData');
+
+    if(!user){
+      user = localStorage.getItem('UserData');
+      if(user){
+        navigate("/User/FillForm");
+      }else{
+        navigate("/User/Login");
+      }
+    }
+  },[]);
 
   useEffect(() => {
     const savedData = localStorage.getItem('damageReportForm');   
