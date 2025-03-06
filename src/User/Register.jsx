@@ -161,7 +161,7 @@ const RegisterForm = () => {
               <label>Select your Beat:</label>
               <select value={beat} onChange={(e) => setBeat(e.target.value)}>
                 <option value="">Select your Beat</option>
-                {/* Add more options here */}
+                {/* Add more options  here */}
               </select>
             </div>
           </div>
