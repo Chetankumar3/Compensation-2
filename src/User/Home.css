@@ -2,8 +2,9 @@
   background-color: rgb(239, 239, 239);
   text-Align: "center";
   color: 'black';
-  padding-top: 1.2rem;
+  padding: 1.2rem;
   min-height: 100vh;
+  width: 98.85vw;
 }
 
 .UserHome *{
@@ -13,19 +14,25 @@
 .UserHome h1{
   text-align: center;
   color: black;
+  margin-bottom: 1rem;
+  color: #020f55;
 }
 
 .UserHome .forms{
-    padding: 10px;
+  width: 85%;
+  padding: 48px;
+  background-color: white;
+  box-shadow: 3px 3px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  margin: auto;
+  min-height: 85vh;
 }
 
 .UserHome .form-card {
     cursor: pointer;
-    background: white;
-    border: 1px solid #f3f3f3;
     border-radius: 8px;
     padding: 16px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
     transition: 0.2s;
     width: 250px;
     height: 270px;
