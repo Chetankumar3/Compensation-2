@@ -38,16 +38,14 @@ const LoginForm = () => {
   const analytics = getAnalytics(app);
   const auth = getAuth();
   const handleLogin = () => {
+    console.log("Called");
     signInWithEmailAndPassword(auth, username + '@gmail.com', password)
       .then((userCredential) => {
-        const status = validatePassword(userCredential.passwordHash);
-        if (!status.isValid) {
-          const needsLowerCase = status.containsLowercaseLetter !== true;
-        }
-      })
-      .then(()=>{
-        console.log("Signed in successfully");
-        navigate('../User/Home');
+      console.log("Signed in successfully");
+
+      const temp = 'Logged In';
+      localStorage.setItem('UserData', JSON.stringify(temp) );
+      navigate('../Home');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -75,7 +73,11 @@ const LoginForm = () => {
           <div className="login-field">
             <label>User ID</label>
             <input
-              type="text"
+              id="password"
+              type="password"
+              name="password"
+              required
+              autocomplete="current-password"
               placeholder="Enter your User ID"
               value={username}
               onChange={(e) => setUsername(e.target.value)}

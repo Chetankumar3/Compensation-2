@@ -21,9 +21,14 @@ const Header = () => {
   });
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("employeeData"));
+    let storedData = JSON.parse(localStorage.getItem("employeeData"));
     if (storedData !== null) {
-      setempData(storedData);
+        setempData(storedData);
+    }else{
+      storedData = JSON.parse(localStorage.getItem("UserData"));
+      if (storedData !== null) {
+        setempData(storedData);
+      }
     }
   }, []);
 

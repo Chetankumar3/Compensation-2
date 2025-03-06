@@ -8,7 +8,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
   const navigate = useNavigate();
-  const [showFirst, setShowFirst] = useState(true);
+  const [showFirst, setShowFirst] = useState(true); 
 
   const handleLogin = async (e) => {
     e.preventDefault();

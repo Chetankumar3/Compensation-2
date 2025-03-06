@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div style={{ textAlign: "center", marginTop: "2rem", color:'black' }}>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is a simple home page built with plain JSX.</p>
+      <h1 style={{ textAlign: "center", marginTop: "2rem", color:'black' }}>Welcome to the Home Page</h1>
+      <a href='#' onClick={navigate('../FillForm')} style={{ textAlign: "center", marginTop: "2rem", color:'black' }}>Fill Form</a>
     </div>
   );
 }

@@ -66,6 +66,7 @@
 .login-container .login-logo {
     width: 120px;
     margin-bottom: 15px;
+    margin: auto;
 }
 
 /* Heading */

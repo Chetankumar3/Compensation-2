@@ -13,6 +13,7 @@ import OfficialForm from "./Official/Form.jsx";
 import UserRegistration from "./User/Register.jsx";
 import UserLogin from "./User/Login.jsx";
 import UserHome from "./User/Home.jsx";
+import UserFillForm from "./User/FillForm.jsx";
 
 function HeaderWithReload() {
   const location = useLocation();
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
       { path: "Register", element: <UserRegistration /> },
       { path: "Login", element: <UserLogin /> },
       { path: "Home", element: <UserHome /> },
+      { path: "FillForm", element: <UserFillForm /> },
     ],
   },
   {
