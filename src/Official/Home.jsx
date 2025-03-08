@@ -15,13 +15,16 @@ const FormDetails = () => {
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("employeeData"));
 
-    if(!user){
+    console.log(user);
+    if (!user) {
       user = localStorage.getItem('UserData');
       if(user){
         navigate("/User/Home");
       }else{
         navigate('/Official/Login');
       }
+    }else{
+        setempData(user);
     }
   }, []);
 
@@ -37,6 +40,7 @@ const FormDetails = () => {
 
   useEffect(() => {
     if(!forms) return;
+    console.log(forms);
 
     if(Loading) setLoading(false);
     handlePendingForYouClick();

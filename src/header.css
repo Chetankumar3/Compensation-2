@@ -4,7 +4,6 @@ header {
   align-items: center;
   background-color: #0f0842;
   padding: 5px;
-  border-bottom: 1px solid #ddd;
   width: 98.85vw;
 }
 
@@ -70,19 +69,19 @@ header .minimize-btn {
   position: absolute;
   top: 10px;
   left: -45px;
-  width: 40px;
-  height: 40px;
+  width: 37px;
+  height: 37px;
   color: white;
-  font-size: 20px;
   font-weight: bold;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.4s;
+  background-color: rgba(100, 100, 100, 0.7);
 }
 
-header .minimize-btn:hover {
-  background-color: rgba(100, 100, 100, 0.7);
+header .minimize-btn:hover  {
+  transform: rotateZ(90deg);
 }
 
 header .cross{
@@ -115,13 +114,16 @@ header .profile .info {
 
 header .profile .info-item {
   margin-bottom: 10px;
+  font-size: 16px;
 }
 
 header .profile .info-item .label {
   font-weight: 550;
+  text-transform: capitalize;
 }
 
 header .profile .info-item .value {
+  text-transform: capitalize;
   margin-left: 10px;
 }
 

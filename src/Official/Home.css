@@ -1,14 +1,14 @@
-/* Main container styling */
 .container3 {
   background-color: #f9f9ff;
   height: 95vh;
   display: grid;
+  width: 100%;
   grid-template-columns: 2fr 9fr;
 }
 
 .container3 .sidebar{
   width: 100%;
-  background-color: #cecbff;
+  background-color: #bebbff;
 }
 
 @keyframes slide {
@@ -76,6 +76,7 @@
 }
 
 .container3 .form-container{
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -94,7 +95,6 @@
   margin: 0 auto;
 }
 
-/* Title styling */
 .container3 .form-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -102,14 +102,12 @@
   margin-bottom: 10px;
 }
 
-/* Paragraph styling */
 .container3 .form-card p {
   font-size: 1rem;
   color: #4b5563;
   margin: 5px 0;
 }
 
-/* Button styling */
 .container3 .view-button {
   background-color: #6366f1;
   color: white;

@@ -40,7 +40,7 @@ function App() {
           setColor("#228B22");
           setMessage("Login successful!");
 
-          fetch(`https://web-production-5485.up.railway.app/guards/${mobileNumber}`) // Replace with actual API URL
+          fetch(`https://web-production-5485.up.railway.app/guards/${mobileNumber}`)
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -57,7 +57,7 @@ function App() {
 
           setTimeout(() => {
             navigate("/Official/Home");
-          }, 1000);
+          }, 300);
         } else {
           setMessage("Login failed. Invalid Guard ID or Mobile Number.");
         }
@@ -73,7 +73,6 @@ function App() {
   const handleSendOtp = () => {
     setMessage("OTP sent to the provided mobile number.");
   };
-
 
   useEffect(() => {
     setTimeout(() => {

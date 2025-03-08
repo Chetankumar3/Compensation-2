@@ -40,7 +40,7 @@ export default function DamageReport() {
   };
 
   return (
-    <div className="form-container">
+    <div className="fill-form-container">
       <div className="form-card">
         <h1 className="form-title">Damage Report Form</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="damage-form">
